@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "prebuild": "rm -rf ./build && rm -rf ./dist",
+    "build": "next build ./src && next export -o dist ./src",
+    "deploy:prod": "aws s3 sync ./dist s3://events.otterandcow.com --delete && aws cloudfront create-invalidation --distribution-id EBJDJ9KIZW3YZ --paths \"/*\"",
     "start": "next start",
     "lint": "next lint"
   },

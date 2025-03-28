@@ -1,0 +1,18 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/client/page": "app/client/page.js",
+  "/event-schedule/genesis/page": "app/event-schedule/genesis/page.js",
+  "/event-schedule/page": "app/event-schedule/page.js",
+  "/event-schedule/submit/page": "app/event-schedule/submit/page.js",
+  "/event-schedule/populate/page": "app/event-schedule/populate/page.js",
+  "/event/page": "app/event/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/icon.ico/route": "app/icon.ico/route.js",
+  "/organizer/page": "app/organizer/page.js",
+  "/location/page": "app/location/page.js",
+  "/page": "app/page.js",
+  "/published-event-schedule/associate/page": "app/published-event-schedule/associate/page.js",
+  "/published-event-schedule/genesis/page": "app/published-event-schedule/genesis/page.js",
+  "/published-event-schedule/submit/page": "app/published-event-schedule/submit/page.js",
+  "/published-event-schedule/page": "app/published-event-schedule/page.js"
+}

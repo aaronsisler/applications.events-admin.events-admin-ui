@@ -7,9 +7,9 @@ import { useRouter } from "next/navigation";
 import {
   getEventScheduleId,
   getScheduledEvents,
-} from "@/lib/features/event-schedule/event-schedule-slice";
-import { usePostScheduledEventsMutation } from "@/lib/features/scheduled-event/scheduled-event-api-slice";
-import { ScheduledEvent } from "@/lib/features/scheduled-event/scheduled-event";
+} from "../../lib/features/event-schedule/event-schedule-slice";
+import { usePostScheduledEventsMutation } from "../../lib/features/scheduled-event/scheduled-event-api-slice";
+import { ScheduledEvent } from "../../lib/features/scheduled-event/scheduled-event";
 
 const SubmitScheduledEventsForm = () => {
   const eventScheduleId = useSelector(getEventScheduleId);

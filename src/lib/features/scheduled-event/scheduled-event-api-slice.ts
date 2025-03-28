@@ -4,8 +4,8 @@ import {
   API_BASE_URL,
   EVENT_SCHEDULES_PATH,
   SCHEDULED_EVENTS_PATH,
-} from "@/lib/constants";
-import { EventSchedule } from "@/lib/features/event-schedule/event-schedule";
+} from "../../constants";
+import { EventSchedule } from "../../features/event-schedule/event-schedule";
 import { ScheduledEvent } from "./scheduled-event";
 
 interface EventScheduleEnvelope {

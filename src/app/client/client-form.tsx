@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { object as zodObject, ZodTypeAny, string as zodString } from "zod";
 
-import { FormInputField } from "@/app/common/form-input-field";
-import { usePostClientsMutation } from "@/lib/features/client/client-api-slice";
+import { FormInputField } from "../common/form-input-field";
+import { usePostClientsMutation } from "../../lib/features/client/client-api-slice";
 
 export type ClientFormData = {
   name: string;

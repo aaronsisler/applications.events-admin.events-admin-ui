@@ -6,9 +6,9 @@ import { useSelector } from "react-redux";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { object as zodObject, ZodTypeAny, string as zodString } from "zod";
 
-import { FormInputField } from "@/app/common/form-input-field";
-import { getClientId } from "@/lib/features/common/common-slice";
-import { usePostOrganizersMutation } from "@/lib/features/organizer/organizer-api-slice";
+import { FormInputField } from "../../app/common/form-input-field";
+import { getClientId } from "../../lib/features/common/common-slice";
+import { usePostOrganizersMutation } from "../../lib/features/organizer/organizer-api-slice";
 
 export type OrganizerFormData = {
   name: string;

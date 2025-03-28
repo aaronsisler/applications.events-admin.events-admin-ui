@@ -3,9 +3,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { FILE_STORAGE_BASE_URL } from "@/lib/constants";
-import { getClientId } from "@/lib/features/common/common-slice";
-import { useGetAllPublishedEventSchedulesQuery } from "@/lib/features/published-event-schedule/published-event-schedule-api-slice";
+import { FILE_STORAGE_BASE_URL } from "../../lib/constants";
+import { getClientId } from "../../lib/features/common/common-slice";
+import { useGetAllPublishedEventSchedulesQuery } from "../../lib/features/published-event-schedule/published-event-schedule-api-slice";
 
 const PublishedEventScheduleList = () => {
   const clientId = useSelector(getClientId);

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { API_BASE_URL, CLIENTS_PATH, EVENTS_PATH } from "@/lib/constants";
-import { Event } from "@/lib/features/event/event";
+import { API_BASE_URL, CLIENTS_PATH, EVENTS_PATH } from "../../constants";
+import { Event } from "../../features/event/event";
 
 interface EventEnvelope {
   clientId: string;

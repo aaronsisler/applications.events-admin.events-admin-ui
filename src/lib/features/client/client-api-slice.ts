@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { API_BASE_URL, CLIENTS_PATH } from "@/lib/constants";
-import { Client } from "@/lib/features/client/client";
+import { API_BASE_URL, CLIENTS_PATH } from "../../constants";
+import { Client } from "../../features/client/client";
 
 interface ClientEnvelope {
   clients: Client[];

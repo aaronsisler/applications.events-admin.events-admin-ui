@@ -4,7 +4,7 @@ import {
   API_BASE_URL,
   CLIENTS_PATH,
   PUBLISHED_EVENT_SCHEDULES_PATH,
-} from "@/lib/constants";
+} from "../../constants";
 import { PublishedEventSchedule } from "./published-event-schedule";
 
 interface PublishedEventScheduleEnvelope {

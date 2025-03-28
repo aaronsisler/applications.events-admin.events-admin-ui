@@ -3,8 +3,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { getClientId } from "@/lib/features/common/common-slice";
-import { useGetAllEventsQuery } from "@/lib/features/event/event-api-slice";
+import { getClientId } from "../../lib/features/common/common-slice";
+import { useGetAllEventsQuery } from "../../lib/features/event/event-api-slice";
 
 const EventList = () => {
   const clientId = useSelector(getClientId);

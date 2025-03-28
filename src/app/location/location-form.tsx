@@ -6,9 +6,9 @@ import { useSelector } from "react-redux";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { object as zodObject, ZodTypeAny, string as zodString } from "zod";
 
-import { FormInputField } from "@/app/common/form-input-field";
-import { getClientId } from "@/lib/features/common/common-slice";
-import { usePostLocationsMutation } from "@/lib/features/location/location-api-slice";
+import { FormInputField } from "../../app/common/form-input-field";
+import { getClientId } from "../../lib/features/common/common-slice";
+import { usePostLocationsMutation } from "../../lib/features/location/location-api-slice";
 
 export type LocationFormData = {
   name: string;

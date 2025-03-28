@@ -3,8 +3,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { getClientId } from "@/lib/features/common/common-slice";
-import { useGetAllLocationsQuery } from "@/lib/features/location/location-api-slice";
+import { getClientId } from "../../lib/features/common/common-slice";
+import { useGetAllLocationsQuery } from "../../lib/features/location/location-api-slice";
 
 const LocationList = () => {
   const clientId = useSelector(getClientId);

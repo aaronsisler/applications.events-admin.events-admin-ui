@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { API_BASE_URL, CLIENTS_PATH, LOCATIONS_PATH } from "@/lib/constants";
-import { Location } from "@/lib/features/location/location";
+import { API_BASE_URL, CLIENTS_PATH, LOCATIONS_PATH } from "../../constants";
+import { Location } from "../../features/location/location";
 
 interface LocationEnvelope {
   clientId: string;

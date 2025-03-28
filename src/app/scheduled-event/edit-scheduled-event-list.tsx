@@ -3,8 +3,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { getScheduledEvents } from "@/lib/features/event-schedule/event-schedule-slice";
-import { ScheduledEvent } from "@/lib/features/scheduled-event/scheduled-event";
+import { getScheduledEvents } from "../../lib/features/event-schedule/event-schedule-slice";
+import { ScheduledEvent } from "../../lib/features/scheduled-event/scheduled-event";
 import { EditScheduledEventForm } from "./edit-scheduled-event-form";
 
 const EditScheduledEventList = () => {

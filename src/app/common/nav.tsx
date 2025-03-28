@@ -3,7 +3,7 @@
 import { Fragment } from "react";
 import Link from "next/link";
 
-import { useGetUserQuery } from "@/lib/features/user/user-api-slice";
+import { useGetUserQuery } from "../../lib/features/user/user-api-slice";
 
 export const Nav = () => {
   const { isLoading, data: user } = useGetUserQuery();

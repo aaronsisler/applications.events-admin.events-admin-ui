@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { object as zodObject, ZodTypeAny, string as zodString } from "zod";
 
-import { FormSelectField } from "@/app/common/form-select-field";
-import { getClientId } from "@/lib/features/common/common-slice";
-import { useGetAllEventSchedulesQuery } from "@/lib/features/event-schedule/event-schedule-api-slice";
-import { updatePublishedEventSchedule } from "@/lib/features/published-event-schedule/published-event-schedule-slice";
+import { FormSelectField } from "../../../app/common/form-select-field";
+import { getClientId } from "../../../lib/features/common/common-slice";
+import { useGetAllEventSchedulesQuery } from "../../../lib/features/event-schedule/event-schedule-api-slice";
+import { updatePublishedEventSchedule } from "../../../lib/features/published-event-schedule/published-event-schedule-slice";
 
 export type AssociateEventScheduleFormData = {
   eventScheduleId: string;
