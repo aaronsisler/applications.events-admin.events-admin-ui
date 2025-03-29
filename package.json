@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "prebuild": "rm -rf ./build && rm -rf ./dist",
-    "build": "next build ./src && next export -o dist ./src",
+    "build": "next build ./src",
     "deploy:prod": "aws s3 sync ./dist s3://events.otterandcow.com --delete && aws cloudfront create-invalidation --distribution-id EBJDJ9KIZW3YZ --paths \"/*\"",
     "start": "next start",
     "lint": "next lint"
@@ -16,23 +16,24 @@
     "@fortawesome/free-regular-svg-icons": "^6.7.1",
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^3.9.0",
-    "@reduxjs/toolkit": "^2.3.0",
-    "next": "^14.2.14",
-    "react": "^18",
-    "react-dom": "^18",
+    "@reduxjs/toolkit": "^2.6.1",
+    "next": "^15.2.4",
+    "react": "^19.1.0",
+    "react-dom": "^19",
     "react-hook-form": "^7.53.1",
-    "react-redux": "^9.1.2",
+    "react-redux": "^9.2.0",
+    "typescript": "^5",
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.14",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "^15",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "tailwindcss": "^3.4.1"
   }
 }

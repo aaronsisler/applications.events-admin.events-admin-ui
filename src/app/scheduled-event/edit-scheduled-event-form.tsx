@@ -4,8 +4,10 @@ import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { object as zodObject, ZodTypeAny, string as zodString } from "zod";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { TrashIcon } from "@heroicons/react/24/solid";
+
+// import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import { FormInputField } from "../common/form-input-field";
 import { ScheduledEvent } from "../../lib/features/scheduled-event/scheduled-event";
@@ -73,7 +75,8 @@ const EditScheduledEventForm: React.FC<EditScheduledEventFormProps> = ({
           onClick={() => handleRemove(index)}
           className="btn btn-delete mt-1"
         >
-          <FontAwesomeIcon className="p-1" icon={faTrash} />
+          <TrashIcon className="size-6 text-red-500" />
+          {/* <FontAwesomeIcon className="p-1" icon={faTrash} /> */}
         </button>
         <FormInputField
           error={errors.name}
