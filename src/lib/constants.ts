@@ -12,4 +12,5 @@ export const PUBLISHED_EVENT_SCHEDULES_PATH = "published-event-schedules";
 export const SCHEDULED_EVENTS_PATH = "scheduled-events";
 export const USERS_PATH = "users";
 
-export const USER_ID = "aaron-sisler-id";
+// This is Aaron Sisler
+export const USER_ID = "2657b120-f0aa-4815-bf77-fcec79c0b773";
