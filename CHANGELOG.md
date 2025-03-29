@@ -21,6 +21,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - When a field on the Edit Scheduled Event form is changed, the store updates onChange/onBlur instead of needing to click the "Save" button.
 - Added a TODO on the Edit Scheduled Event Form to remove the "Save" button.
 
+## [1.0.0] Deployment to AWS
+
+### Added
+
+- The changes for deploying to AWS S3 and Cloudfront
+
 ## [0.17.0] Published Event Schedules
 
 ### Added

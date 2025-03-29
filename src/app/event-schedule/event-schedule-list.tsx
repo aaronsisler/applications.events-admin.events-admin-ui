@@ -3,8 +3,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { getClientId } from "@/lib/features/common/common-slice";
-import { useGetAllEventSchedulesQuery } from "@/lib/features/event-schedule/event-schedule-api-slice";
+import { getClientId } from "../../lib/features/common/common-slice";
+import { useGetAllEventSchedulesQuery } from "../../lib/features/event-schedule/event-schedule-api-slice";
 
 const EventScheduleList = () => {
   const clientId = useSelector(getClientId);

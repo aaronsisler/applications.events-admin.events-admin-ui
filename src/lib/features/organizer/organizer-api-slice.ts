@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { API_BASE_URL, CLIENTS_PATH, ORGANIZERS_PATH } from "@/lib/constants";
-import { Organizer } from "@/lib/features/organizer/organizer";
+import { API_BASE_URL, CLIENTS_PATH, ORGANIZERS_PATH } from "../../constants";
+import { Organizer } from "../../features/organizer/organizer";
 
 interface OrganizerEnvelope {
   clientId: string;

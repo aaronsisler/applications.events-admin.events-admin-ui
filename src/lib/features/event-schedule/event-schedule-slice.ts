@@ -1,7 +1,7 @@
 // Need to use the React-specific entry point to import `createApi`
 import { createSlice } from "@reduxjs/toolkit";
 
-import { ScheduledEvent } from "@/lib/features/scheduled-event/scheduled-event";
+import { ScheduledEvent } from "../../features/scheduled-event/scheduled-event";
 
 export interface EventScheduleState {
   eventScheduleId: string;

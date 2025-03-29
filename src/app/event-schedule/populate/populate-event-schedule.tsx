@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { object as zodObject, ZodTypeAny, string as zodString } from "zod";
 
-import { FormSelectField } from "@/app/common/form-select-field";
-import { getClientId } from "@/lib/features/common/common-slice";
-import { Event } from "@/lib/features/event/event";
-import { useGetAllEventsQuery } from "@/lib/features/event/event-api-slice";
+import { FormSelectField } from "../../../app/common/form-select-field";
+import { getClientId } from "../../../lib/features/common/common-slice";
+import { Event } from "../../../lib/features/event/event";
+import { useGetAllEventsQuery } from "../../../lib/features/event/event-api-slice";
 import {
   getEventScheduleId,
   addScheduledEvent,
-} from "@/lib/features/event-schedule/event-schedule-slice";
+} from "../../../lib/features/event-schedule/event-schedule-slice";
 
 export type PopulateEventScheduleFormData = {
   eventId: string;

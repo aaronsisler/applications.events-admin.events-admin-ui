@@ -7,10 +7,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { object as zodObject, ZodTypeAny, string as zodString } from "zod";
 
-import { FormInputField } from "@/app/common/form-input-field";
-import { getClientId } from "@/lib/features/common/common-slice";
-import { usePostEventSchedulesMutation } from "@/lib/features/event-schedule/event-schedule-api-slice";
-import { setEventScheduleId } from "@/lib/features/event-schedule/event-schedule-slice";
+import { FormInputField } from "../../../app/common/form-input-field";
+import { getClientId } from "../../../lib/features/common/common-slice";
+import { usePostEventSchedulesMutation } from "../../../lib/features/event-schedule/event-schedule-api-slice";
+import { setEventScheduleId } from "../../../lib/features/event-schedule/event-schedule-slice";
 
 export type EventScheduleFormData = {
   name: string;

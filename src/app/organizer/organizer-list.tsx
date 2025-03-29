@@ -3,8 +3,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { getClientId } from "@/lib/features/common/common-slice";
-import { useGetAllOrganizersQuery } from "@/lib/features/organizer/organizer-api-slice";
+import { getClientId } from "../../lib/features/common/common-slice";
+import { useGetAllOrganizersQuery } from "../../lib/features/organizer/organizer-api-slice";
 
 const OrganizerList = () => {
   const clientId = useSelector(getClientId);

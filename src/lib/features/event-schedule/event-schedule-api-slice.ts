@@ -4,8 +4,8 @@ import {
   API_BASE_URL,
   CLIENTS_PATH,
   EVENT_SCHEDULES_PATH,
-} from "@/lib/constants";
-import { EventSchedule } from "@/lib/features/event-schedule/event-schedule";
+} from "../../constants";
+import { EventSchedule } from "../../features/event-schedule/event-schedule";
 
 interface EventScheduleEnvelope {
   clientId: string;

@@ -4,19 +4,21 @@ import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { object as zodObject, ZodTypeAny, string as zodString } from "zod";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { TrashIcon } from "@heroicons/react/24/solid";
 
-import { FormInputField } from "@/app/common/form-input-field";
-import { ScheduledEvent } from "@/lib/features/scheduled-event/scheduled-event";
+// import { faTrash } from "@fortawesome/free-solid-svg-icons";
+
+import { FormInputField } from "../common/form-input-field";
+import { ScheduledEvent } from "../../lib/features/scheduled-event/scheduled-event";
 import {
   removeScheduledEvent,
   updateScheduledEventField,
-} from "@/lib/features/event-schedule/event-schedule-slice";
+} from "../../lib/features/event-schedule/event-schedule-slice";
 import { FormSelectField } from "../common/form-select-field";
-import { ScheduledEventType } from "@/lib/features/scheduled-event/scheduled-event-type";
-import { ScheduledEventInterval } from "@/lib/features/scheduled-event/scheduled-event-interval";
-import { ScheduledEventDay } from "@/lib/features/scheduled-event/scheduled-event-day";
+import { ScheduledEventType } from "../../lib/features/scheduled-event/scheduled-event-type";
+import { ScheduledEventInterval } from "../../lib/features/scheduled-event/scheduled-event-interval";
+import { ScheduledEventDay } from "../../lib/features/scheduled-event/scheduled-event-day";
 
 export type EditScheduledEventFormProps = {
   index: number;
@@ -73,7 +75,8 @@ const EditScheduledEventForm: React.FC<EditScheduledEventFormProps> = ({
           onClick={() => handleRemove(index)}
           className="btn btn-delete mt-1"
         >
-          <FontAwesomeIcon className="p-1" icon={faTrash} />
+          <TrashIcon className="size-6 text-red-500" />
+          {/* <FontAwesomeIcon className="p-1" icon={faTrash} /> */}
         </button>
         <FormInputField
           error={errors.name}

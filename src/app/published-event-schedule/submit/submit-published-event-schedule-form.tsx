@@ -4,10 +4,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
-import { getClientId } from "@/lib/features/common/common-slice";
-import { usePostPublishedEventScheduleMutation } from "@/lib/features/published-event-schedule/published-event-schedule-api-slice";
-import { getPublishedEventSchedule } from "@/lib/features/published-event-schedule/published-event-schedule-slice";
-import { PublishedEventSchedule } from "@/lib/features/published-event-schedule/published-event-schedule";
+import { getClientId } from "../../../lib/features/common/common-slice";
+import { usePostPublishedEventScheduleMutation } from "../../../lib/features/published-event-schedule/published-event-schedule-api-slice";
+import { getPublishedEventSchedule } from "../../../lib/features/published-event-schedule/published-event-schedule-slice";
+import { PublishedEventSchedule } from "../../../lib/features/published-event-schedule/published-event-schedule";
 
 const SubmitPublishedEventScheduleForm = () => {
   const clientId: string = useSelector(getClientId);

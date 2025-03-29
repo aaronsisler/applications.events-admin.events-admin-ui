@@ -1,17 +1,17 @@
 import type { Action, ThunkAction } from "@reduxjs/toolkit";
 import { combineSlices, configureStore } from "@reduxjs/toolkit";
 
-import { clientApiSlice } from "@/lib/features/client/client-api-slice";
-import { commonSlice } from "@/lib/features/common/common-slice";
-import { eventApiSlice } from "@/lib/features/event/event-api-slice";
-import { eventScheduleApiSlice } from "@/lib/features/event-schedule/event-schedule-api-slice";
-import { eventScheduleSlice } from "@/lib/features/event-schedule/event-schedule-slice";
-import { locationApiSlice } from "@/lib/features/location/location-api-slice";
-import { organizerApiSlice } from "@/lib/features/organizer/organizer-api-slice";
-import { publishedEventScheduleApiSlice } from "@/lib/features/published-event-schedule/published-event-schedule-api-slice";
-import { publishedEventScheduleSlice } from "@/lib/features/published-event-schedule/published-event-schedule-slice";
-import { scheduledEventApiSlice } from "@/lib/features/scheduled-event/scheduled-event-api-slice";
-import { userApiSlice } from "@/lib/features/user/user-api-slice";
+import { clientApiSlice } from "./features/client/client-api-slice";
+import { commonSlice } from "./features/common/common-slice";
+import { eventApiSlice } from "./features/event/event-api-slice";
+import { eventScheduleApiSlice } from "./features/event-schedule/event-schedule-api-slice";
+import { eventScheduleSlice } from "./features/event-schedule/event-schedule-slice";
+import { locationApiSlice } from "./features/location/location-api-slice";
+import { organizerApiSlice } from "./features/organizer/organizer-api-slice";
+import { publishedEventScheduleApiSlice } from "./features/published-event-schedule/published-event-schedule-api-slice";
+import { publishedEventScheduleSlice } from "./features/published-event-schedule/published-event-schedule-slice";
+import { scheduledEventApiSlice } from "./features/scheduled-event/scheduled-event-api-slice";
+import { userApiSlice } from "./features/user/user-api-slice";
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
