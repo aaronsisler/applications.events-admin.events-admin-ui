@@ -1,5 +1,5 @@
 export interface Event {
-  clientId: string;
+  establishmentId: string;
   name: string;
   eventId?: string;
   locationId?: string;

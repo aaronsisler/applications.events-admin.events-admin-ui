@@ -1,10 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { API_BASE_URL, CLIENTS_PATH, LOCATIONS_PATH } from "../../constants";
+import {
+  API_BASE_URL,
+  ESTABLISHMENTS_PATH,
+  LOCATIONS_PATH,
+} from "../../constants";
 import { Location } from "../../features/location/location";
 
 interface LocationEnvelope {
-  clientId: string;
+  establishmentId: string;
   locations: Location[];
 }
 
@@ -14,13 +18,13 @@ export const locationApiSlice = createApi({
   tagTypes: ["Location"],
   endpoints: (build) => ({
     getAllLocations: build.query<Location[], string>({
-      query: (clientId: string) =>
-        `${CLIENTS_PATH}/${clientId}/${LOCATIONS_PATH}`,
+      query: (establishmentId: string) =>
+        `${ESTABLISHMENTS_PATH}/${establishmentId}/${LOCATIONS_PATH}`,
       providesTags: ["Location"],
     }),
     postLocations: build.mutation<Location[], Partial<LocationEnvelope>>({
-      query: ({ clientId, locations }) => ({
-        url: `${CLIENTS_PATH}/${clientId}/${LOCATIONS_PATH}`,
+      query: ({ establishmentId, locations }) => ({
+        url: `${ESTABLISHMENTS_PATH}/${establishmentId}/${LOCATIONS_PATH}`,
         method: "POST",
         body: locations,
       }),

@@ -1,5 +1,5 @@
-export interface Client {
-  clientId?: string;
+export interface Establishment {
+  establishmentId?: string;
   name: string;
   createdOn?: string;
   lastUpdatedOn?: string;

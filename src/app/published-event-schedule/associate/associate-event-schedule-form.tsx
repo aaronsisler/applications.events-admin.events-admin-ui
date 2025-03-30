@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { object as zodObject, ZodTypeAny, string as zodString } from "zod";
 
 import { FormSelectField } from "../../../app/common/form-select-field";
-import { getClientId } from "../../../lib/features/common/common-slice";
+import { getestablishmentId } from "../../../lib/features/common/common-slice";
 import { useGetAllEventSchedulesQuery } from "../../../lib/features/event-schedule/event-schedule-api-slice";
 import { updatePublishedEventSchedule } from "../../../lib/features/published-event-schedule/published-event-schedule-slice";
 
@@ -23,11 +23,14 @@ const AssociateEventScheduleForm = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const clientId = useSelector(getClientId);
-  const isClientIdPopulated: boolean = !!clientId;
-  const { data: eventSchedules } = useGetAllEventSchedulesQuery(clientId, {
-    skip: !isClientIdPopulated,
-  });
+  const establishmentId = useSelector(getestablishmentId);
+  const isestablishmentIdPopulated: boolean = !!establishmentId;
+  const { data: eventSchedules } = useGetAllEventSchedulesQuery(
+    establishmentId,
+    {
+      skip: !isestablishmentIdPopulated,
+    }
+  );
 
   const {
     register: registerFormInput,

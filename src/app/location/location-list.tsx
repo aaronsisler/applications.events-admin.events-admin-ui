@@ -3,16 +3,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { getClientId } from "../../lib/features/common/common-slice";
+import { getestablishmentId } from "../../lib/features/common/common-slice";
 import { useGetAllLocationsQuery } from "../../lib/features/location/location-api-slice";
 
 const LocationList = () => {
-  const clientId = useSelector(getClientId);
-  const isClientIdPopulated: boolean = !!clientId;
+  const establishmentId = useSelector(getestablishmentId);
+  const isestablishmentIdPopulated: boolean = !!establishmentId;
 
-  const { data: locations, isError } = useGetAllLocationsQuery(clientId, {
-    skip: !isClientIdPopulated,
-  });
+  const { data: locations, isError } = useGetAllLocationsQuery(
+    establishmentId,
+    {
+      skip: !isestablishmentIdPopulated,
+    }
+  );
 
   return (
     <React.Fragment>

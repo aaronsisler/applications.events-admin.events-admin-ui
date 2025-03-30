@@ -8,7 +8,7 @@ import { object as zodObject, ZodTypeAny, string as zodString } from "zod";
 
 import { FormInputField } from "../../app/common/form-input-field";
 import { FormSelectField } from "../../app/common/form-select-field";
-import { getClientId } from "../../lib/features/common/common-slice";
+import { getestablishmentId } from "../../lib/features/common/common-slice";
 import { usePostEventsMutation } from "../../lib/features/event/event-api-slice";
 import { useGetAllLocationsQuery } from "../../lib/features/location/location-api-slice";
 import { useGetAllOrganizersQuery } from "../../lib/features/organizer/organizer-api-slice";
@@ -30,14 +30,14 @@ const eventSchema: ZodTypeAny = zodObject({
 });
 
 const EventForm = () => {
-  const clientId = useSelector(getClientId);
-  const isClientIdPopulated: boolean = !!clientId;
+  const establishmentId = useSelector(getestablishmentId);
+  const isestablishmentIdPopulated: boolean = !!establishmentId;
 
-  const { data: locations } = useGetAllLocationsQuery(clientId, {
-    skip: !isClientIdPopulated,
+  const { data: locations } = useGetAllLocationsQuery(establishmentId, {
+    skip: !isestablishmentIdPopulated,
   });
-  const { data: organizers } = useGetAllOrganizersQuery(clientId, {
-    skip: !isClientIdPopulated,
+  const { data: organizers } = useGetAllOrganizersQuery(establishmentId, {
+    skip: !isestablishmentIdPopulated,
   });
   const [register, { isError }] = usePostEventsMutation();
 
@@ -58,10 +58,10 @@ const EventForm = () => {
     organizerId,
   }: EventFormData) => {
     const { error } = await register({
-      clientId,
+      establishmentId,
       events: [
         {
-          clientId,
+          establishmentId,
           name,
           description,
           category,

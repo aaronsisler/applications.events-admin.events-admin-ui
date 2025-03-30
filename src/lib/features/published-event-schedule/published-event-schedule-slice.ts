@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { PublishedEventSchedule } from "./published-event-schedule";
 
 const initialState: PublishedEventSchedule = {
-  clientId: "",
+  establishmentId: "",
   eventScheduleId: "",
   name: "",
   targetYear: 1900,

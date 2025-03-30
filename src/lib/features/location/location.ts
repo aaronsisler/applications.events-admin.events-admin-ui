@@ -1,5 +1,5 @@
 export interface Location {
-  clientId?: string;
+  establishmentId?: string;
   locationId?: string;
   name: string;
   createdOn?: string;

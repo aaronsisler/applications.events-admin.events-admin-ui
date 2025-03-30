@@ -11,8 +11,8 @@ export const Nav = () => {
   return (
     <Fragment>
       <nav className="flex">
-        <Link className="mr-2" href="/client">
-          Client
+        <Link className="mr-2" href="/establishment">
+          Establishment
         </Link>
         &nbsp;&nbsp;
         <Link className="mr-2" href="/location">

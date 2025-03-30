@@ -1,5 +1,5 @@
 export interface EventSchedule {
-  clientId: string;
+  establishmentId: string;
   name: string;
   eventScheduleId?: string;
   description?: string;

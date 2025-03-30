@@ -3,16 +3,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { getClientId } from "../../lib/features/common/common-slice";
+import { getestablishmentId } from "../../lib/features/common/common-slice";
 import { useGetAllOrganizersQuery } from "../../lib/features/organizer/organizer-api-slice";
 
 const OrganizerList = () => {
-  const clientId = useSelector(getClientId);
-  const isClientIdPopulated: boolean = !!clientId;
+  const establishmentId = useSelector(getestablishmentId);
+  const isestablishmentIdPopulated: boolean = !!establishmentId;
 
-  const { data: organizers, isError } = useGetAllOrganizersQuery(clientId, {
-    skip: !isClientIdPopulated,
-  });
+  const { data: organizers, isError } = useGetAllOrganizersQuery(
+    establishmentId,
+    {
+      skip: !isestablishmentIdPopulated,
+    }
+  );
 
   return (
     <React.Fragment>

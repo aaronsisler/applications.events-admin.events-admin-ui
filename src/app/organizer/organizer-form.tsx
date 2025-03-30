@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { object as zodObject, ZodTypeAny, string as zodString } from "zod";
 
 import { FormInputField } from "../../app/common/form-input-field";
-import { getClientId } from "../../lib/features/common/common-slice";
+import { getestablishmentId } from "../../lib/features/common/common-slice";
 import { usePostOrganizersMutation } from "../../lib/features/organizer/organizer-api-slice";
 
 export type OrganizerFormData = {
@@ -19,7 +19,7 @@ const organizerSchema: ZodTypeAny = zodObject({
 });
 
 const OrganizerForm = () => {
-  const clientId = useSelector(getClientId);
+  const establishmentId = useSelector(getestablishmentId);
   const [register, { isError }] = usePostOrganizersMutation();
 
   const {
@@ -33,8 +33,8 @@ const OrganizerForm = () => {
 
   const onSubmit = async (name: string) => {
     const { error } = await register({
-      clientId,
-      organizers: [{ clientId, name }],
+      establishmentId,
+      organizers: [{ establishmentId, name }],
     });
 
     const wasPostSuccessful: boolean = error == undefined;

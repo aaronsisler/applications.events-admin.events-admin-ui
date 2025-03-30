@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { API_BASE_URL, USER_ID, USERS_PATH } from "../../constants";
-import { setClientId } from "../../features/common/common-slice";
+import { setestablishmentId } from "../../features/common/common-slice";
 import { User } from "../../features/user/user";
 
 export const userApiSlice = createApi({
@@ -13,8 +13,8 @@ export const userApiSlice = createApi({
       onQueryStarted: async (_arg, api) => {
         const { dispatch, queryFulfilled } = api;
         const { data: user } = await queryFulfilled;
-        if (user?.clientIds?.[0]) {
-          dispatch(setClientId(user?.clientIds?.[0]));
+        if (user?.establishmentIds?.[0]) {
+          dispatch(setestablishmentId(user?.establishmentIds?.[0]));
         }
       },
     }),

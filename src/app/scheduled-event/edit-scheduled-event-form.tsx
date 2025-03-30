@@ -26,7 +26,7 @@ export type EditScheduledEventFormProps = {
 };
 
 const scheduledEventSchema: ZodTypeAny = zodObject({
-  clientId: zodString(),
+  establishmentId: zodString(),
   eventId: zodString(),
   eventScheduleId: zodString(),
   locationId: zodString().nullable(),

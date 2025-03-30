@@ -3,7 +3,7 @@ import { ScheduledEventInterval } from "./scheduled-event-interval";
 import { ScheduledEventType } from "./scheduled-event-type";
 
 export interface ScheduledEvent {
-  clientId: string;
+  establishmentId: string;
   eventId: string;
   eventScheduleId: string;
   name: string;
