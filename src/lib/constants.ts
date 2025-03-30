@@ -1,5 +1,5 @@
-// export const API_BASE_URL = "http://localhost:8080";
-export const API_BASE_URL = "https://events-service.otterandcow.com";
+export const API_BASE_URL = "https://localhost:8443";
+// export const API_BASE_URL = "https://events-service.otterandcow.com";
 export const FILE_STORAGE_BASE_URL =
   "http://events-service.otterandcow.com/event-admin-service-file-storage";
 
@@ -13,4 +13,5 @@ export const SCHEDULED_EVENTS_PATH = "scheduled-events";
 export const USERS_PATH = "users";
 
 // This is Aaron Sisler
-export const USER_ID = "2657b120-f0aa-4815-bf77-fcec79c0b773";
+// export const USER_ID = "2657b120-f0aa-4815-bf77-fcec79c0b773";
+export const USER_ID = "aaron-sisler-id";

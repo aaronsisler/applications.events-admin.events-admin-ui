@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build ./src",
     "deploy:prod": "aws s3 sync ./dist s3://events.otterandcow.com --delete && aws cloudfront create-invalidation --distribution-id EBJDJ9KIZW3YZ --paths \"/*\"",
+    "prestart": "next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -20,7 +21,7 @@
     "@reduxjs/toolkit": "^2.6.1",
     "next": "^15.2.4",
     "react": "^19.1.0",
-    "react-dom": "^19",
+    "react-dom": "^19.1.0",
     "react-hook-form": "^7.53.1",
     "react-redux": "^9.2.0",
     "typescript": "^5",
@@ -31,7 +32,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "^15",
+    "eslint-config-next": "^15.2.4",
     "postcss": "^8",
     "tailwindcss": "^3.4.1"
   }
