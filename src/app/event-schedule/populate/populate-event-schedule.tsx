@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { object as zodObject, ZodTypeAny, string as zodString } from "zod";
 
 import { FormSelectField } from "../../../app/common/form-select-field";
-import { getClientId } from "../../../lib/features/common/common-slice";
+import { getestablishmentId } from "../../../lib/features/common/common-slice";
 import { Event } from "../../../lib/features/event/event";
 import { useGetAllEventsQuery } from "../../../lib/features/event/event-api-slice";
 import {
@@ -27,10 +27,10 @@ const PopulateEventScheduleForm = () => {
   const dispatch = useDispatch();
 
   const eventScheduleId: string = useSelector(getEventScheduleId);
-  const clientId = useSelector(getClientId);
-  const isClientIdPopulated: boolean = !!clientId;
-  const { data: events } = useGetAllEventsQuery(clientId, {
-    skip: !isClientIdPopulated,
+  const establishmentId = useSelector(getestablishmentId);
+  const isestablishmentIdPopulated: boolean = !!establishmentId;
+  const { data: events } = useGetAllEventsQuery(establishmentId, {
+    skip: !isestablishmentIdPopulated,
   });
 
   const {

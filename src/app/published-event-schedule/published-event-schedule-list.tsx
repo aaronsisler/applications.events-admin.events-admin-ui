@@ -4,16 +4,16 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import { FILE_STORAGE_BASE_URL } from "../../lib/constants";
-import { getClientId } from "../../lib/features/common/common-slice";
+import { getestablishmentId } from "../../lib/features/common/common-slice";
 import { useGetAllPublishedEventSchedulesQuery } from "../../lib/features/published-event-schedule/published-event-schedule-api-slice";
 
 const PublishedEventScheduleList = () => {
-  const clientId = useSelector(getClientId);
-  const isClientIdPopulated: boolean = !!clientId;
+  const establishmentId = useSelector(getestablishmentId);
+  const isestablishmentIdPopulated: boolean = !!establishmentId;
 
   const { data: publishedEventSchedules, isError } =
-    useGetAllPublishedEventSchedulesQuery(clientId, {
-      skip: !isClientIdPopulated,
+    useGetAllPublishedEventSchedulesQuery(establishmentId, {
+      skip: !isestablishmentIdPopulated,
     });
 
   return (
@@ -37,7 +37,7 @@ const PublishedEventScheduleList = () => {
               <td>{publishedEventSchedule.name}</td>
               <td>
                 <a
-                  href={`${FILE_STORAGE_BASE_URL}/${clientId}/${publishedEventSchedule.filename}`}
+                  href={`${FILE_STORAGE_BASE_URL}/${establishmentId}/${publishedEventSchedule.filename}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

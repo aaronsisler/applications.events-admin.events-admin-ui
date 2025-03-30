@@ -2,31 +2,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface CommonState {
-  clientId: string;
+  establishmentId: string;
 }
 
 const commonInititalState: CommonState = {
-  clientId: "",
+  establishmentId: "",
 };
 
 export const commonSlice = createSlice({
   name: "common",
   initialState: commonInititalState,
   reducers: {
-    setClientId(state, action) {
-      return { ...state, clientId: action.payload };
+    setestablishmentId(state, action) {
+      return { ...state, establishmentId: action.payload };
     },
-    clearClientId(state) {
-      return { ...state, clientId: "" };
+    clearestablishmentId(state) {
+      return { ...state, establishmentId: "" };
     },
   },
   selectors: {
-    getClientId: (state) => state.clientId,
+    getestablishmentId: (state) => state.establishmentId,
   },
 });
 
-export const { clearClientId, setClientId } = commonSlice.actions;
+export const { clearestablishmentId, setestablishmentId } = commonSlice.actions;
 
 export const commonReducer = commonSlice.reducer;
 
-export const { getClientId } = commonSlice.selectors;
+export const { getestablishmentId } = commonSlice.selectors;

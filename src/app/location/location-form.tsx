@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { object as zodObject, ZodTypeAny, string as zodString } from "zod";
 
 import { FormInputField } from "../../app/common/form-input-field";
-import { getClientId } from "../../lib/features/common/common-slice";
+import { getestablishmentId } from "../../lib/features/common/common-slice";
 import { usePostLocationsMutation } from "../../lib/features/location/location-api-slice";
 
 export type LocationFormData = {
@@ -19,7 +19,7 @@ const locationSchema: ZodTypeAny = zodObject({
 });
 
 const LocationForm = () => {
-  const clientId = useSelector(getClientId);
+  const establishmentId = useSelector(getestablishmentId);
   const [register, { isError }] = usePostLocationsMutation();
 
   const {
@@ -33,8 +33,8 @@ const LocationForm = () => {
 
   const onSubmit = async (name: string) => {
     const { error } = await register({
-      clientId,
-      locations: [{ clientId, name }],
+      establishmentId,
+      locations: [{ establishmentId, name }],
     });
 
     const wasPostSuccessful: boolean = error == undefined;

@@ -1,5 +1,5 @@
 export interface Organizer {
-  clientId?: string;
+  establishmentId?: string;
   organizerId?: string;
   name: string;
   createdOn?: string;

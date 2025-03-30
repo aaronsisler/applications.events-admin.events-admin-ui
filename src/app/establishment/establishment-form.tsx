@@ -6,30 +6,30 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { object as zodObject, ZodTypeAny, string as zodString } from "zod";
 
 import { FormInputField } from "../common/form-input-field";
-import { usePostClientsMutation } from "../../lib/features/client/client-api-slice";
+import { usePostEstablishmentsMutation } from "../../lib/features/establishment/establishment-api-slice";
 
-export type ClientFormData = {
+export type EstablishmentFormData = {
   name: string;
 };
 
-const clientSchema: ZodTypeAny = zodObject({
-  clientId: zodString().min(1, { message: "Required" }),
+const establishmentSchema: ZodTypeAny = zodObject({
+  establishmentId: zodString().min(1, { message: "Required" }),
 });
 
-const ClientForm = () => {
-  const [register, { isError }] = usePostClientsMutation();
+const EstablishmentForm = () => {
+  const [register, { isError }] = usePostEstablishmentsMutation();
 
   const {
     register: registerFormInput,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<ClientFormData>({
-    resolver: zodResolver(clientSchema),
+  } = useForm<EstablishmentFormData>({
+    resolver: zodResolver(establishmentSchema),
   });
 
   const onSubmit = async (name: string) => {
-    const { error } = await register({ clients: [{ name }] });
+    const { error } = await register({ establishments: [{ name }] });
 
     const wasPostSuccessful: boolean = error == undefined;
 
@@ -42,7 +42,9 @@ const ClientForm = () => {
   return (
     <React.Fragment>
       <form
-        onSubmit={handleSubmit(({ name }: ClientFormData) => onSubmit(name))}
+        onSubmit={handleSubmit(({ name }: EstablishmentFormData) =>
+          onSubmit(name)
+        )}
       >
         {isError && (
           <React.Fragment>
@@ -51,7 +53,7 @@ const ClientForm = () => {
           </React.Fragment>
         )}
         <FormInputField
-          placeholder="Client Name"
+          placeholder="Establishment Name"
           name="name"
           register={registerFormInput}
           error={errors.name}
@@ -60,11 +62,11 @@ const ClientForm = () => {
         <input
           className="btn btn-blue mt-5"
           type="submit"
-          value="Create Client"
+          value="Create Establishment"
         />
       </form>
     </React.Fragment>
   );
 };
 
-export { ClientForm };
+export { EstablishmentForm };

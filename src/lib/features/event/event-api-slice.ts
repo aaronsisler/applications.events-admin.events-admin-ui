@@ -1,10 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { API_BASE_URL, CLIENTS_PATH, EVENTS_PATH } from "../../constants";
+import {
+  API_BASE_URL,
+  ESTABLISHMENTS_PATH,
+  EVENTS_PATH,
+} from "../../constants";
 import { Event } from "../../features/event/event";
 
 interface EventEnvelope {
-  clientId: string;
+  establishmentId: string;
   events: Event[];
 }
 
@@ -14,12 +18,13 @@ export const eventApiSlice = createApi({
   tagTypes: ["Event"],
   endpoints: (build) => ({
     getAllEvents: build.query<Event[], string>({
-      query: (clientId: string) => `${CLIENTS_PATH}/${clientId}/${EVENTS_PATH}`,
+      query: (establishmentId: string) =>
+        `${ESTABLISHMENTS_PATH}/${establishmentId}/${EVENTS_PATH}`,
       providesTags: ["Event"],
     }),
     postEvents: build.mutation<Event[], Partial<EventEnvelope>>({
-      query: ({ clientId, events }) => ({
-        url: `${CLIENTS_PATH}/${clientId}/${EVENTS_PATH}`,
+      query: ({ establishmentId, events }) => ({
+        url: `${ESTABLISHMENTS_PATH}/${establishmentId}/${EVENTS_PATH}`,
         method: "POST",
         body: events,
       }),

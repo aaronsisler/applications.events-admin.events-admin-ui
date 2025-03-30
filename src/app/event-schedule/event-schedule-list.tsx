@@ -3,17 +3,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { getClientId } from "../../lib/features/common/common-slice";
+import { getestablishmentId } from "../../lib/features/common/common-slice";
 import { useGetAllEventSchedulesQuery } from "../../lib/features/event-schedule/event-schedule-api-slice";
 
 const EventScheduleList = () => {
-  const clientId = useSelector(getClientId);
-  const isClientIdPopulated: boolean = !!clientId;
+  const establishmentId = useSelector(getestablishmentId);
+  const isestablishmentIdPopulated: boolean = !!establishmentId;
 
   const { data: eventSchedules, isError } = useGetAllEventSchedulesQuery(
-    clientId,
+    establishmentId,
     {
-      skip: !isClientIdPopulated,
+      skip: !isestablishmentIdPopulated,
     }
   );
 

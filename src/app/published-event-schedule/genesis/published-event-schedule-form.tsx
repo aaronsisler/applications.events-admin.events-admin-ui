@@ -8,11 +8,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { object as zodObject, ZodTypeAny, string as zodString } from "zod";
 
 import { FormInputField } from "../../../app/common/form-input-field";
-import { getClientId } from "../../../lib/features/common/common-slice";
+import { getestablishmentId } from "../../../lib/features/common/common-slice";
 import { updatePublishedEventSchedule } from "../../../lib/features/published-event-schedule/published-event-schedule-slice";
 
 export type PublishedEventScheduleFormData = {
-  clientId: string;
+  establishmentId: string;
   name: string;
   targetYear: string;
   targetMonth: string;
@@ -25,7 +25,7 @@ const publishedEventScheduleSchema: ZodTypeAny = zodObject({
 });
 
 const PublishedEventScheduleForm = () => {
-  const clientId = useSelector(getClientId);
+  const establishmentId = useSelector(getestablishmentId);
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -43,14 +43,19 @@ const PublishedEventScheduleForm = () => {
   });
 
   const onSubmit = async ({
-    clientId,
+    establishmentId,
     name,
     targetYear,
     targetMonth,
   }: PublishedEventScheduleFormData) => {
     console.log("Here maybe?");
     dispatch(
-      updatePublishedEventSchedule({ clientId, name, targetYear, targetMonth })
+      updatePublishedEventSchedule({
+        establishmentId,
+        name,
+        targetYear,
+        targetMonth,
+      })
     );
     router.push("/published-event-schedule/associate");
   };
@@ -59,7 +64,7 @@ const PublishedEventScheduleForm = () => {
     <form
       onSubmit={handleSubmit(
         ({ name, targetYear, targetMonth }: PublishedEventScheduleFormData) =>
-          onSubmit({ clientId, name, targetYear, targetMonth })
+          onSubmit({ establishmentId, name, targetYear, targetMonth })
       )}
     >
       <FormInputField

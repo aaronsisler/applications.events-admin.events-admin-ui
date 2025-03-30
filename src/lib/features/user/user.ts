@@ -1,6 +1,6 @@
 export interface User {
   userId?: string;
-  clientIds?: string[];
+  establishmentIds?: string[];
   name: string;
   createdOn?: string;
   lastUpdatedOn?: string;

@@ -3,15 +3,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { getClientId } from "../../lib/features/common/common-slice";
+import { getestablishmentId } from "../../lib/features/common/common-slice";
 import { useGetAllEventsQuery } from "../../lib/features/event/event-api-slice";
 
 const EventList = () => {
-  const clientId = useSelector(getClientId);
-  const isClientIdPopulated: boolean = !!clientId;
+  const establishmentId = useSelector(getestablishmentId);
+  const isestablishmentIdPopulated: boolean = !!establishmentId;
 
-  const { data: events, isError } = useGetAllEventsQuery(clientId, {
-    skip: !isClientIdPopulated,
+  const { data: events, isError } = useGetAllEventsQuery(establishmentId, {
+    skip: !isestablishmentIdPopulated,
   });
 
   return (

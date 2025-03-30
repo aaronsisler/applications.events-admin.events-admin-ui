@@ -2,13 +2,13 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import {
   API_BASE_URL,
-  CLIENTS_PATH,
+  ESTABLISHMENTS_PATH,
   PUBLISHED_EVENT_SCHEDULES_PATH,
 } from "../../constants";
 import { PublishedEventSchedule } from "./published-event-schedule";
 
 interface PublishedEventScheduleEnvelope {
-  clientId: string;
+  establishmentId: string;
   publishedEventSchedule: PublishedEventSchedule;
 }
 
@@ -21,16 +21,16 @@ export const publishedEventScheduleApiSlice = createApi({
       PublishedEventSchedule[],
       string
     >({
-      query: (clientId: string) =>
-        `${CLIENTS_PATH}/${clientId}/${PUBLISHED_EVENT_SCHEDULES_PATH}`,
+      query: (establishmentId: string) =>
+        `${ESTABLISHMENTS_PATH}/${establishmentId}/${PUBLISHED_EVENT_SCHEDULES_PATH}`,
       providesTags: ["Published Event Schedule"],
     }),
     postPublishedEventSchedule: build.mutation<
       PublishedEventSchedule,
       Partial<PublishedEventScheduleEnvelope>
     >({
-      query: ({ clientId, publishedEventSchedule }) => ({
-        url: `${CLIENTS_PATH}/${clientId}/${PUBLISHED_EVENT_SCHEDULES_PATH}`,
+      query: ({ establishmentId, publishedEventSchedule }) => ({
+        url: `${ESTABLISHMENTS_PATH}/${establishmentId}/${PUBLISHED_EVENT_SCHEDULES_PATH}`,
         method: "POST",
         body: publishedEventSchedule,
       }),

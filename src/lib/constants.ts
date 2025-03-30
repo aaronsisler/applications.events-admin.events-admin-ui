@@ -3,7 +3,7 @@ export const API_BASE_URL = "https://events-service.otterandcow.com";
 export const FILE_STORAGE_BASE_URL =
   "http://events-service.otterandcow.com/event-admin-service-file-storage";
 
-export const CLIENTS_PATH = "clients";
+export const ESTABLISHMENTS_PATH = "establishments";
 export const EVENT_SCHEDULES_PATH = "event-schedules";
 export const EVENTS_PATH = "events";
 export const LOCATIONS_PATH = "locations";

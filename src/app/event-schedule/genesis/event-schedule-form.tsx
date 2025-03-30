@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { object as zodObject, ZodTypeAny, string as zodString } from "zod";
 
 import { FormInputField } from "../../../app/common/form-input-field";
-import { getClientId } from "../../../lib/features/common/common-slice";
+import { getestablishmentId } from "../../../lib/features/common/common-slice";
 import { usePostEventSchedulesMutation } from "../../../lib/features/event-schedule/event-schedule-api-slice";
 import { setEventScheduleId } from "../../../lib/features/event-schedule/event-schedule-slice";
 
@@ -23,7 +23,7 @@ const eventScheduleSchema: ZodTypeAny = zodObject({
 });
 
 const EventScheduleForm = () => {
-  const clientId = useSelector(getClientId);
+  const establishmentId = useSelector(getestablishmentId);
   const [register, { isError }] = usePostEventSchedulesMutation();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -39,8 +39,8 @@ const EventScheduleForm = () => {
 
   const onSubmit = async ({ name, description }: EventScheduleFormData) => {
     const { data: eventSchedules, error } = await register({
-      clientId,
-      eventSchedules: [{ clientId, name, description }],
+      establishmentId,
+      eventSchedules: [{ establishmentId, name, description }],
     });
 
     const wasPostSuccessful: boolean = error == undefined;

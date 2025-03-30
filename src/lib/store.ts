@@ -1,7 +1,7 @@
 import type { Action, ThunkAction } from "@reduxjs/toolkit";
 import { combineSlices, configureStore } from "@reduxjs/toolkit";
 
-import { clientApiSlice } from "./features/client/client-api-slice";
+import { establishmentApiSlice } from "./features/establishment/establishment-api-slice";
 import { commonSlice } from "./features/common/common-slice";
 import { eventApiSlice } from "./features/event/event-api-slice";
 import { eventScheduleApiSlice } from "./features/event-schedule/event-schedule-api-slice";
@@ -16,8 +16,8 @@ import { userApiSlice } from "./features/user/user-api-slice";
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
 const rootReducer = combineSlices(
-  clientApiSlice,
   commonSlice,
+  establishmentApiSlice,
   eventApiSlice,
   eventScheduleApiSlice,
   eventScheduleSlice,
@@ -42,7 +42,7 @@ export const makeStore = () => {
     // and other useful features of `rtk-query`.
     middleware: (getDefaultMiddleware) => {
       return getDefaultMiddleware()
-        .concat(clientApiSlice.middleware)
+        .concat(establishmentApiSlice.middleware)
         .concat(eventApiSlice.middleware)
         .concat(eventScheduleApiSlice.middleware)
         .concat(locationApiSlice.middleware)

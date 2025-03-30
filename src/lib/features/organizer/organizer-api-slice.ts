@@ -1,10 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { API_BASE_URL, CLIENTS_PATH, ORGANIZERS_PATH } from "../../constants";
+import {
+  API_BASE_URL,
+  ESTABLISHMENTS_PATH,
+  ORGANIZERS_PATH,
+} from "../../constants";
 import { Organizer } from "../../features/organizer/organizer";
 
 interface OrganizerEnvelope {
-  clientId: string;
+  establishmentId: string;
   organizers: Organizer[];
 }
 
@@ -14,13 +18,13 @@ export const organizerApiSlice = createApi({
   tagTypes: ["Organizer"],
   endpoints: (build) => ({
     getAllOrganizers: build.query<Organizer[], string>({
-      query: (clientId: string) =>
-        `${CLIENTS_PATH}/${clientId}/${ORGANIZERS_PATH}`,
+      query: (establishmentId: string) =>
+        `${ESTABLISHMENTS_PATH}/${establishmentId}/${ORGANIZERS_PATH}`,
       providesTags: ["Organizer"],
     }),
     postOrganizers: build.mutation<Organizer[], Partial<OrganizerEnvelope>>({
-      query: ({ clientId, organizers }) => ({
-        url: `${CLIENTS_PATH}/${clientId}/${ORGANIZERS_PATH}`,
+      query: ({ establishmentId, organizers }) => ({
+        url: `${ESTABLISHMENTS_PATH}/${establishmentId}/${ORGANIZERS_PATH}`,
         method: "POST",
         body: organizers,
       }),

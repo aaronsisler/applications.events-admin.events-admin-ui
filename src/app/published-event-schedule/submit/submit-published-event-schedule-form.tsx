@@ -4,13 +4,13 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
-import { getClientId } from "../../../lib/features/common/common-slice";
+import { getestablishmentId } from "../../../lib/features/common/common-slice";
 import { usePostPublishedEventScheduleMutation } from "../../../lib/features/published-event-schedule/published-event-schedule-api-slice";
 import { getPublishedEventSchedule } from "../../../lib/features/published-event-schedule/published-event-schedule-slice";
 import { PublishedEventSchedule } from "../../../lib/features/published-event-schedule/published-event-schedule";
 
 const SubmitPublishedEventScheduleForm = () => {
-  const clientId: string = useSelector(getClientId);
+  const establishmentId: string = useSelector(getestablishmentId);
   const publishedEventSchedule: PublishedEventSchedule = useSelector(
     getPublishedEventSchedule
   );
@@ -18,14 +18,14 @@ const SubmitPublishedEventScheduleForm = () => {
   const router = useRouter();
 
   const handleSubmit = async ({
-    clientId,
+    establishmentId,
     publishedEventSchedule,
   }: {
-    clientId: string;
+    establishmentId: string;
     publishedEventSchedule: PublishedEventSchedule;
   }) => {
     const { error } = await register({
-      clientId,
+      establishmentId,
       publishedEventSchedule,
     });
 
@@ -43,7 +43,7 @@ const SubmitPublishedEventScheduleForm = () => {
     <button
       type="button"
       className="btn btn-blue mt-5"
-      onClick={() => handleSubmit({ clientId, publishedEventSchedule })}
+      onClick={() => handleSubmit({ establishmentId, publishedEventSchedule })}
     >
       Submit
     </button>
