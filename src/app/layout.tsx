@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import type { Metadata } from "next";
 
 import { StoreProvider } from "./store-provider";
@@ -6,24 +5,24 @@ import { Nav } from "./common/nav";
 
 import "./styles/globals.css";
 
-interface Props {
-  readonly children: ReactNode;
-}
-
 export const metadata: Metadata = {
   title: "Events Admin",
   description: "Events Admin UI that calls the Events Admin Service for data",
 };
 
-export default function RootLayout({ children }: Props) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <StoreProvider>
-      <html lang="en">
-        <body>
+    <html lang="en">
+      <body>
+        <StoreProvider>
           <Nav />
           <main>{children}</main>
-        </body>
-      </html>
-    </StoreProvider>
+        </StoreProvider>
+      </body>
+    </html>
   );
 }
