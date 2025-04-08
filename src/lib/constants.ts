@@ -7,12 +7,10 @@ export const PUBLISHED_EVENT_SCHEDULES_PATH = "published-event-schedules";
 export const SCHEDULED_EVENTS_PATH = "scheduled-events";
 export const USERS_PATH = "users";
 
+const BASE_STORAGE_FOLDER = "event-admin-service-file-storage";
+
 export const FILE_STORAGE_BASE_URL =
-  "http://events-service.otterandcow.com/event-admin-service-file-storage";
+  process.env.NEXT_PUBLIC_FILE_STORAGE_SERVER_URL + "/" + BASE_STORAGE_FOLDER;
 
-// This is Aaron Sisler
-export const USER_ID = "2657b120-f0aa-4815-bf77-fcec79c0b773";
-// export const USER_ID = "aaron-sisler-id";
-
-export const API_BASE_URL = "https://events-service.otterandcow.com";
-// export const API_BASE_URL = "http://localhost:8080";
+export const USER_ID = process.env.NEXT_PUBLIC_USER_ID;
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;

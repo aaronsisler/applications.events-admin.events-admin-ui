@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build ./src",
+    "dev": "cross-env NODE_ENV=development next dev --turbopack",
+    "build": "cross-env NODE_ENV=production next build ./src",
     "deploy:prod": "aws s3 sync ./dist s3://events.otterandcow.com --delete && aws cloudfront create-invalidation --distribution-id EBJDJ9KIZW3YZ --paths \"/*\"",
-    "prestart": "next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -31,6 +30,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^7.0.3",
     "eslint": "^9",
     "eslint-config-next": "^15.2.4",
     "postcss": "^8",
