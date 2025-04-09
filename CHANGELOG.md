@@ -14,18 +14,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities.
 
-## [0.18.0] Dynamic store updates for Scheduled Events
+## [1.1.0] Fixing Local versus AWS build and runtime
 
-### Added
+### Changed
 
-- When a field on the Edit Scheduled Event form is changed, the store updates onChange/onBlur instead of needing to click the "Save" button.
-- Added a TODO on the Edit Scheduled Event Form to remove the "Save" button.
+- Tweaking the next.config.js and .env files for development versus production
 
 ## [1.0.0] Deployment to AWS
 
 ### Added
 
 - The changes for deploying to AWS S3 and Cloudfront
+
+## [0.18.0] Dynamic store updates for Scheduled Events
+
+### Added
+
+- When a field on the Edit Scheduled Event form is changed, the store updates onChange/onBlur instead of needing to click the "Save" button.
+- Added a TODO on the Edit Scheduled Event Form to remove the "Save" button.
 
 ## [0.17.0] Published Event Schedules
 
