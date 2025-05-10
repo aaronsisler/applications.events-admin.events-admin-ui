@@ -1,3 +1,3 @@
 export default function IndexPage() {
-  return <div>Landing Page</div>;
+  return <div>Landing Page!</div>;
 }
