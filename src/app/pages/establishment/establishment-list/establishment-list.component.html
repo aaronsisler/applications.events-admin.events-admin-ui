@@ -1,0 +1,10 @@
+@if (establishmentStore.error()) {
+<h2>Check the console for errors</h2>
+} @else {
+<h2>Establishments</h2>
+<ul>
+  @for (establishment of establishmentStore.establishments(); track $index) {
+  <li>{{ establishment.name }}</li>
+  }
+</ul>
+}
