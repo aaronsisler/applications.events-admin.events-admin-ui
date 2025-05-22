@@ -6,6 +6,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { EstablishmentService } from "../../../core/services/establishment-service";
+import { EstablishmentStore } from "../../../core/stores/establishment.store";
 
 @Component({
   selector: "app-establishment-form",
@@ -16,6 +17,7 @@ import { EstablishmentService } from "../../../core/services/establishment-servi
 export class EstablishmentFormComponent {
   formGroup: FormGroup;
   establishmentService = inject(EstablishmentService);
+  readonly establishmentStore = inject(EstablishmentStore);
 
   constructor(private fb: FormBuilder) {
     this.formGroup = this.fb.group({
@@ -24,17 +26,7 @@ export class EstablishmentFormComponent {
   }
 
   handleSubmit() {
-    console.log("Data");
-    console.log(this.formGroup.value);
-    this.establishmentService.postList([this.formGroup.value]).subscribe({
-      next: (response) => {
-        console.log("Success!", response);
-        // Handle success (e.g., show a success message, reset the form)
-      },
-      error: (error) => {
-        console.error("Error!", error);
-        // Handle error (e.g., display an error message)
-      },
-    });
+    this.establishmentStore.postAll([this.formGroup.value]);
+    this.formGroup.reset();
   }
 }

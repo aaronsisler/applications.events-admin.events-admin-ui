@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, inject, OnInit } from "@angular/core";
 import { Establishment } from "../establishment";
 import { EstablishmentService } from "../../../core/services/establishment-service";
+import { EstablishmentStore } from "../../../core/stores/establishment.store";
 
 @Component({
   selector: "app-establishment-list",
@@ -10,12 +11,9 @@ import { EstablishmentService } from "../../../core/services/establishment-servi
 })
 export class EstablishmentListComponent implements OnInit {
   establishmentList: Establishment[] = [];
-
-  constructor(private establishmentService: EstablishmentService) {}
+  readonly establishmentStore = inject(EstablishmentStore);
 
   ngOnInit(): void {
-    this.establishmentService.getList().subscribe((data) => {
-      this.establishmentList = data;
-    });
+    this.establishmentStore.getAll();
   }
 }
