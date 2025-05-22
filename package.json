@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy:prod": "aws s3 sync ./dist/events-admin-ui/browser s3://events.otterandcow.com --delete && aws cloudfront create-invalidation --distribution-id EBJDJ9KIZW3YZ --paths \"/*\""
   },
   "private": true,
   "dependencies": {
