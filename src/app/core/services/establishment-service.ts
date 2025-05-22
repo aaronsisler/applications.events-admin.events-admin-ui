@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Establishment } from "../../pages/establishment/establishment";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map, Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class EstablishmentService {
-  private apiUrl = "https://localhost:8443/establishments";
+  private apiUrl = "http://localhost:8080/establishments";
 
   constructor(private http: HttpClient) {}
 
@@ -17,5 +17,10 @@ export class EstablishmentService {
         return response;
       })
     );
+  }
+
+  postList(establishments: Establishment[]): Observable<any> {
+    const headers = new HttpHeaders({ "Content-Type": "application/json" });
+    return this.http.post(this.apiUrl, establishments, { headers: headers });
   }
 }
