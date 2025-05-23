@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Establishment } from "../../pages/establishment/establishment";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map, Observable } from "rxjs";
+
+import { Establishment } from "../models/establishment";
 import { environment } from "../../../environments/environment";
 
 @Injectable({

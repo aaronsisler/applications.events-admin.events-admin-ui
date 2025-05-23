@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from "@angular/core";
 import { MatTableModule } from "@angular/material/table";
 
-import { Establishment } from "../establishment";
+import { Establishment } from "../../../core/models/establishment";
 import { EstablishmentStore } from "../../../core/stores/establishment.store";
 
 @Component({

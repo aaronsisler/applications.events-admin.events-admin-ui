@@ -1,5 +1,5 @@
 import { signalStore, withState, withMethods, patchState } from "@ngrx/signals";
-import { Establishment } from "../../pages/establishment/establishment";
+import { Establishment } from "../models/establishment";
 import { inject } from "@angular/core";
 import { EstablishmentService } from "../services/establishment-service";
 
