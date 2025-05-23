@@ -12,7 +12,7 @@ import { EstablishmentStore } from "../../../core/stores/establishment.store";
 })
 export class EstablishmentListComponent implements OnInit {
   establishmentList: Establishment[] = [];
-  displayedColumns: string[] = ["establishment-id", "name"];
+  displayedColumns: string[] = ["id", "name"];
 
   readonly establishmentStore = inject(EstablishmentStore);
 

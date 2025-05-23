@@ -21,8 +21,8 @@ export const LocationStore = signalStore(
   withMethods((store) => {
     const locationService = inject(LocationService);
     return {
-      getAll: (): void => {
-        locationService.getList().subscribe({
+      getAll: (establishmentId: string): void => {
+        locationService.getList(establishmentId).subscribe({
           next: (locations) => {
             patchState(store, () => ({ locations, isLoading: false }));
           },
@@ -32,11 +32,11 @@ export const LocationStore = signalStore(
           },
         });
       },
-      postAll: (locations: Location[]): void => {
-        locationService.postList(locations).subscribe({
+      postAll: (establishmentId: string, locations: Location[]): void => {
+        locationService.postList(establishmentId, locations).subscribe({
           next: (newLocations) => {
             patchState(store, () => ({
-              establishments: [...store.locations(), ...newLocations],
+              locations: [...(store.locations() || []), ...newLocations],
               isLoading: false,
             }));
           },

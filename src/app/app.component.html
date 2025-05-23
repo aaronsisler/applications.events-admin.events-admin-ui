@@ -1,4 +1,14 @@
 <app-navbar />
+@if(userStore.isLoading()){
+<main>
+  <p>Application is loading...</p>
+</main>
+} @else if(userStore.hasError()){
+<main>
+  <p>User did not load correctly!</p>
+</main>
+} @else {
 <main>
   <router-outlet />
 </main>
+}

@@ -11,18 +11,26 @@ import { environment } from "../../../environments/environment";
 export class LocationService {
   constructor(private http: HttpClient) {}
 
-  getList(): Observable<Location[]> {
-    return this.http.get<Location[]>(`${environment.apiUrl}/locations`).pipe(
-      map((response: Location[]) => {
-        return response;
-      })
-    );
+  getList(establishmentId: string): Observable<Location[]> {
+    return this.http
+      .get<Location[]>(
+        `${environment.apiUrl}/establishments/${establishmentId}/locations`
+      )
+      .pipe(
+        map((response: Location[]) => {
+          return response;
+        })
+      );
   }
 
-  postList(locations: Location[]): Observable<any> {
+  postList(establishmentId: string, locations: Location[]): Observable<any> {
     const headers = new HttpHeaders({ "Content-Type": "application/json" });
-    return this.http.post(`${environment.apiUrl}/locations`, locations, {
-      headers: headers,
-    });
+    return this.http.post(
+      `${environment.apiUrl}/establishments/${establishmentId}/locations`,
+      locations,
+      {
+        headers: headers,
+      }
+    );
   }
 }
