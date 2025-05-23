@@ -1,7 +1,9 @@
-@if (establishmentStore.error()) {
-<h2>Check the console for errors</h2>
-} @else {
 <h2>Establishments</h2>
+@if (establishmentStore.hasError()) {
+<p>Check the console for errors</p>
+}
+<!-- Blank Comment -->
+@if(!establishmentStore.hasError() && !establishmentStore.isLoading()) {
 <table
   mat-table
   [dataSource]="establishmentStore.establishments()"

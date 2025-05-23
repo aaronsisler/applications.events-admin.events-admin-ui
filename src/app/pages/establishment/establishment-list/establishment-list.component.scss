@@ -1,3 +1,5 @@
+@use "sass:color";
+
 table {
   width: 100%;
 
@@ -15,7 +17,8 @@ table {
   }
 
   .mat-mdc-row:hover .mat-mdc-cell {
-    background-color: darken($color: aliceblue, $amount: 10%);
+    // background-color: darken($color: aliceblue, $amount: 10%);
+    background-color: color.adjust($color: aliceblue, $lightness: -10%);
   }
 
   .mat-column-establishment-id {
