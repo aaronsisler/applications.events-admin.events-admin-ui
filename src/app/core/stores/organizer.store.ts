@@ -21,8 +21,8 @@ export const OrganizerStore = signalStore(
   withMethods((store) => {
     const organizerService = inject(OrganizerService);
     return {
-      getAll: (): void => {
-        organizerService.getList().subscribe({
+      getAll: (establishmentId: string): void => {
+        organizerService.getList(establishmentId).subscribe({
           next: (organizers) => {
             patchState(store, () => ({ organizers, isLoading: false }));
           },
@@ -32,11 +32,11 @@ export const OrganizerStore = signalStore(
           },
         });
       },
-      postAll: (organizers: Organizer[]): void => {
-        organizerService.postList(organizers).subscribe({
+      postAll: (establishmentId: string, organizers: Organizer[]): void => {
+        organizerService.postList(establishmentId, organizers).subscribe({
           next: (newOrganizers) => {
             patchState(store, () => ({
-              organizers: [...store.organizers(), ...newOrganizers],
+              organizers: [...(store.organizers() || []), ...newOrganizers],
               isLoading: false,
             }));
           },

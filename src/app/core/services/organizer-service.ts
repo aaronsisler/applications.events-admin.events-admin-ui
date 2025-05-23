@@ -11,18 +11,26 @@ import { Organizer } from "../models/organizer";
 export class OrganizerService {
   constructor(private http: HttpClient) {}
 
-  getList(): Observable<Organizer[]> {
-    return this.http.get<Organizer[]>(`${environment.apiUrl}/organizers`).pipe(
-      map((response: Organizer[]) => {
-        return response;
-      })
-    );
+  getList(establishmentId: string): Observable<Organizer[]> {
+    return this.http
+      .get<Organizer[]>(
+        `${environment.apiUrl}/establishments/${establishmentId}/organizers`
+      )
+      .pipe(
+        map((response: Organizer[]) => {
+          return response;
+        })
+      );
   }
 
-  postList(organizers: Organizer[]): Observable<any> {
+  postList(establishmentId: string, organizers: Organizer[]): Observable<any> {
     const headers = new HttpHeaders({ "Content-Type": "application/json" });
-    return this.http.post(`${environment.apiUrl}/organizers`, organizers, {
-      headers: headers,
-    });
+    return this.http.post(
+      `${environment.apiUrl}/establishments/${establishmentId}/organizers`,
+      organizers,
+      {
+        headers: headers,
+      }
+    );
   }
 }
