@@ -2,9 +2,23 @@
 <h2>Check the console for errors</h2>
 } @else {
 <h2>Establishments</h2>
-<ul>
-  @for (establishment of establishmentStore.establishments(); track $index) {
-  <li>{{ establishment.name }}</li>
-  }
-</ul>
+<table
+  mat-table
+  [dataSource]="establishmentStore.establishments()"
+  class="mat-elevation-z8"
+>
+  <!-- Id Column -->
+  <ng-container matColumnDef="establishment-id">
+    <th mat-header-cell *matHeaderCellDef>Establishment Id</th>
+    <td mat-cell *matCellDef="let element">{{ element.establishmentId }}</td>
+  </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
 }
