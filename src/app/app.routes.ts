@@ -5,10 +5,6 @@ import { PublishedEventScheduleComponent } from "./pages/published-event-schedul
 import { PublishedEventScheduleAssociateComponent } from "./pages/published-event-schedule/associate/published-event-schedule-associate.component";
 import { PublishedEventScheduleSubmitComponent } from "./pages/published-event-schedule/submit/published-event-schedule-submit.component";
 import { PublishedEventScheduleCreateComponent } from "./pages/published-event-schedule/create/published-event-schedule-create.component";
-import { EventScheduleCreateComponent } from "./pages/event-schedule/workflow/create/event-schedule-create.component";
-import { EventSchedulePopulateComponent } from "./pages/event-schedule/workflow/populate/event-schedule-populate.component";
-import { EventScheduleSubmitComponent } from "./pages/event-schedule/workflow/submit/event-schedule-submit.component";
-import { EventScheduleWorkflowComponent } from "./pages/event-schedule/workflow/event-schedule-workflow/event-schedule-workflow.component";
 import { EventScheduleListComponent } from "./pages/event-schedule/event-schedule-list/event-schedule-list.component";
 
 export const routes: Routes = [
@@ -27,31 +23,21 @@ export const routes: Routes = [
   {
     path: "event-schedule",
     component: EventScheduleComponent,
-
     children: [
       { path: "", redirectTo: "list", pathMatch: "full" },
       {
         path: "list",
-        component: EventScheduleListComponent,
+        loadComponent: () =>
+          import(
+            "./pages/event-schedule/event-schedule-list/event-schedule-list.component"
+          ).then((c) => c.EventScheduleListComponent),
       },
       {
         path: "workflow",
-        component: EventScheduleWorkflowComponent,
-        children: [
-          { path: "", redirectTo: "create", pathMatch: "full" },
-          {
-            path: "create",
-            component: EventScheduleCreateComponent,
-          },
-          {
-            path: "populate",
-            component: EventSchedulePopulateComponent,
-          },
-          {
-            path: "submit",
-            component: EventScheduleSubmitComponent,
-          },
-        ],
+        loadChildren: () =>
+          import(
+            "./pages/event-schedule/workflow/event-schedule-workflow-routing.module"
+          ).then((m) => m.EventScheduleWorkflowRoutingModule),
       },
     ],
   },
