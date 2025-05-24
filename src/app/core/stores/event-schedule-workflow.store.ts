@@ -6,12 +6,14 @@ import { EventScheduleService } from "../services/event-schedule-service";
 
 interface EventScheduleWorkflowState {
   eventSchedule: EventSchedule | undefined;
+  currentStep: number;
   hasError: boolean;
   isLoading: boolean;
 }
 
 const initialState: EventScheduleWorkflowState = {
   eventSchedule: undefined,
+  currentStep: 0,
   hasError: false,
   isLoading: true,
 };
@@ -21,6 +23,14 @@ export const EventScheduleWorkflowStore = signalStore(
   withMethods((store) => {
     const eventScheduleService = inject(EventScheduleService);
     return {
+      incrementStep: (): void =>
+        patchState(store, () => ({
+          currentStep: store.currentStep() + 1,
+        })),
+      decrementStep: (): void =>
+        patchState(store, () => ({
+          currentStep: store.currentStep() - 1,
+        })),
       createAll: (
         establishmentId: string,
         eventSchedules: EventSchedule[]

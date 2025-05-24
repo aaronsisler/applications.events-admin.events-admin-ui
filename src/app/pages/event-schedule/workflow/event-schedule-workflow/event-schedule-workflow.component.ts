@@ -7,6 +7,6 @@ import { EventScheduleWorkflowStore } from "../../../../core/stores/event-schedu
   imports: [RouterOutlet, RouterLink],
   templateUrl: "./event-schedule-workflow.component.html",
   styleUrl: "./event-schedule-workflow.component.scss",
-  providers: [EventScheduleWorkflowStore],
+  providers: [],
 })
 export class EventScheduleWorkflowComponent {}
