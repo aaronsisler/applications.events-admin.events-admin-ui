@@ -41,7 +41,7 @@ export const OrganizerStore = signalStore(
             }));
           },
           error: (error) => {
-            console.error("Failed to fetch organizers", error);
+            console.error("Failed to create organizers", error);
             patchState(store, () => ({ hasError: true, isLoading: false }));
           },
         });

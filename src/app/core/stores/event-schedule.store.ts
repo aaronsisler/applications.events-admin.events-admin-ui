@@ -27,32 +27,10 @@ export const EventScheduleStore = signalStore(
             patchState(store, () => ({ eventSchedules, isLoading: false }));
           },
           error: (error) => {
-            console.error("Failed to fetch event schedules", error);
+            console.error("Failed to create event schedules", error);
             patchState(store, () => ({ hasError: true, isLoading: false }));
           },
         });
-      },
-      createAll: (
-        establishmentId: string,
-        eventSchedules: EventSchedule[]
-      ): void => {
-        eventScheduleService
-          .postList(establishmentId, eventSchedules)
-          .subscribe({
-            next: (newEventSchedules) => {
-              patchState(store, () => ({
-                events: [
-                  ...(store.eventSchedules() || []),
-                  ...newEventSchedules,
-                ],
-                isLoading: false,
-              }));
-            },
-            error: (error) => {
-              console.error("Failed to fetch event schedules", error);
-              patchState(store, () => ({ hasError: true, isLoading: false }));
-            },
-          });
       },
     };
   })

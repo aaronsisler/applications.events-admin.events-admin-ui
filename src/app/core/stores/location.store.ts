@@ -41,7 +41,7 @@ export const LocationStore = signalStore(
             }));
           },
           error: (error) => {
-            console.error("Failed to fetch establishments", error);
+            console.error("Failed to create establishments", error);
             patchState(store, () => ({ hasError: true, isLoading: false }));
           },
         });
