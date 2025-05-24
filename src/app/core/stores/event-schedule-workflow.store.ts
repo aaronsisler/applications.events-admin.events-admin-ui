@@ -3,9 +3,11 @@ import { signalStore, withState, withMethods, patchState } from "@ngrx/signals";
 
 import { EventSchedule } from "../models/event-schedule";
 import { EventScheduleService } from "../services/event-schedule-service";
+import { ScheduledEvent } from "../models/scheduled-event";
 
 interface EventScheduleWorkflowState {
   eventSchedule: EventSchedule | undefined;
+  scheduledEvents: ScheduledEvent[];
   currentStep: number;
   hasError: boolean;
   isLoading: boolean;
@@ -13,6 +15,7 @@ interface EventScheduleWorkflowState {
 
 const initialState: EventScheduleWorkflowState = {
   eventSchedule: undefined,
+  scheduledEvents: [],
   currentStep: 1,
   hasError: false,
   isLoading: true,
@@ -23,6 +26,25 @@ export const EventScheduleWorkflowStore = signalStore(
   withMethods((store) => {
     const eventScheduleService = inject(EventScheduleService);
     return {
+      reset: (): void =>
+        patchState(store, () => ({
+          ...initialState,
+        })),
+      addScheduledEvent: (scheduledEvent: ScheduledEvent): void =>
+        patchState(store, () => ({
+          scheduledEvents: [...store.scheduledEvents(), scheduledEvent],
+        })),
+      updateScheduledEvent: (
+        index: number,
+        scheduledEvent: ScheduledEvent
+      ): void =>
+        patchState(store, () => ({
+          scheduledEvents: [
+            ...store.scheduledEvents().slice(0, index),
+            scheduledEvent,
+            ...store.scheduledEvents().slice(index + 1),
+          ],
+        })),
       incrementStep: (): void =>
         patchState(store, () => ({
           currentStep: store.currentStep() + 1,

@@ -10,11 +10,10 @@ import {
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatButtonModule } from "@angular/material/button";
+import { Router } from "@angular/router";
 
 import { EventScheduleWorkflowStore } from "../../../../core/stores/event-schedule-workflow.store";
 import { UserStore } from "../../../../core/stores/user.store";
-import { Router } from "@angular/router";
-import { timeout } from "rxjs";
 
 @Component({
   selector: "app-event-schedule-create",
@@ -38,6 +37,7 @@ export class EventScheduleCreateComponent {
   constructor(private fb: FormBuilder, private router: Router) {
     this.formGroup = this.fb.group({
       name: ["", Validators.required],
+      description: [""],
     });
   }
 

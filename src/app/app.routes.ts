@@ -1,6 +1,5 @@
 import { Routes } from "@angular/router";
 import { EventScheduleComponent } from "./pages/event-schedule/event-schedule.component";
-import { ScheduledEventComponent } from "./pages/scheduled-event/scheduled-event.component";
 import { PublishedEventScheduleComponent } from "./pages/published-event-schedule/published-event-schedule.component";
 import { PublishedEventScheduleAssociateComponent } from "./pages/published-event-schedule/associate/published-event-schedule-associate.component";
 import { PublishedEventScheduleSubmitComponent } from "./pages/published-event-schedule/submit/published-event-schedule-submit.component";
@@ -53,10 +52,6 @@ export const routes: Routes = [
       import("./pages/organizer/organizer.component").then(
         (c) => c.OrganizerComponent
       ),
-  },
-  {
-    path: "scheduled-event",
-    component: ScheduledEventComponent,
   },
   {
     path: "published-event-schedule",

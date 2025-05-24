@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ScheduledEventComponent } from './scheduled-event.component';
+import { EventSelectorComponent } from './event-selector.component';
 
-describe('ScheduledEventComponent', () => {
-  let component: ScheduledEventComponent;
-  let fixture: ComponentFixture<ScheduledEventComponent>;
+describe('EventSelectorComponent', () => {
+  let component: EventSelectorComponent;
+  let fixture: ComponentFixture<EventSelectorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ScheduledEventComponent]
+      imports: [EventSelectorComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ScheduledEventComponent);
+    fixture = TestBed.createComponent(EventSelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

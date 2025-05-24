@@ -1,0 +1,17 @@
+<form [formGroup]="formGroup" class="event-selector">
+  <mat-form-field>
+    <mat-label>Select an event</mat-label>
+    <mat-select
+      (selectionChange)="handleSelect($event.value)"
+      formControlName="eventId"
+    >
+      <mat-option [value]="null">-- Select --</mat-option>
+      @for (event of eventStore.events(); track event.eventId) {
+      <mat-option [value]="event">{{ event.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button type="button" (click)="handleButtonClick()">
+    Add event
+  </button>
+</form>

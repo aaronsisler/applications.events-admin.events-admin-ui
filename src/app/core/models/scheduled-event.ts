@@ -1,11 +1,11 @@
 export interface ScheduledEvent {
   eventId: string;
   establishmentId: string;
-  locationId: string;
-  organizerId: string;
+  locationId?: string;
+  organizerId?: string;
   name: string;
-  description: string;
-  category: string;
-  createdOn: Date;
-  lastUpdatedOn: Date;
+  description?: string;
+  category?: string;
+  createdOn?: Date;
+  lastUpdatedOn?: Date;
 }
