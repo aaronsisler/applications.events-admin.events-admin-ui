@@ -1,16 +1,18 @@
 import { signalStore, withState, withMethods, patchState } from "@ngrx/signals";
-import { Establishment } from "../../pages/establishment/establishment";
+import { Establishment } from "../models/establishment";
 import { inject } from "@angular/core";
 import { EstablishmentService } from "../services/establishment-service";
 
 interface EstablishmentState {
   establishments: Establishment[];
-  error: boolean;
+  hasError: boolean;
+  isLoading: boolean;
 }
 
 const initialState: EstablishmentState = {
   establishments: [],
-  error: false,
+  hasError: false,
+  isLoading: true,
 };
 
 export const EstablishmentStore = signalStore(
@@ -21,11 +23,11 @@ export const EstablishmentStore = signalStore(
       getAll: (): void => {
         establishmentService.getList().subscribe({
           next: (establishments) => {
-            patchState(store, () => ({ establishments }));
+            patchState(store, () => ({ establishments, isLoading: false }));
           },
           error: (error) => {
             console.error("Failed to fetch establishments", error);
-            patchState(store, () => ({ error: true }));
+            patchState(store, () => ({ hasError: true, isLoading: false }));
           },
         });
       },
@@ -34,11 +36,12 @@ export const EstablishmentStore = signalStore(
           next: (newEstablishments) => {
             patchState(store, () => ({
               establishments: [...store.establishments(), ...newEstablishments],
+              isLoading: false,
             }));
           },
           error: (error) => {
             console.error("Failed to fetch establishments", error);
-            patchState(store, () => ({ error: true }));
+            patchState(store, () => ({ hasError: true, isLoading: false }));
           },
         });
       },

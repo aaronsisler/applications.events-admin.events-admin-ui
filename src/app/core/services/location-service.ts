@@ -2,31 +2,35 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map, Observable } from "rxjs";
 
-import { Establishment } from "../models/establishment";
+import { Location } from "../models/location";
 import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
-export class EstablishmentService {
+export class LocationService {
   constructor(private http: HttpClient) {}
 
-  getList(): Observable<Establishment[]> {
+  getList(establishmentId: string): Observable<Location[]> {
     return this.http
-      .get<Establishment[]>(`${environment.apiUrl}/establishments`)
+      .get<Location[]>(
+        `${environment.apiUrl}/establishments/${establishmentId}/locations`
+      )
       .pipe(
-        map((response: Establishment[]) => {
+        map((response: Location[]) => {
           return response;
         })
       );
   }
 
-  postList(establishments: Establishment[]): Observable<any> {
+  postList(establishmentId: string, locations: Location[]): Observable<any> {
     const headers = new HttpHeaders({ "Content-Type": "application/json" });
     return this.http.post(
-      `${environment.apiUrl}/establishments`,
-      establishments,
-      { headers: headers }
+      `${environment.apiUrl}/establishments/${establishmentId}/locations`,
+      locations,
+      {
+        headers: headers,
+      }
     );
   }
 }

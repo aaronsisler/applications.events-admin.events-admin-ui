@@ -11,10 +11,11 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatButtonModule } from "@angular/material/button";
 
-import { EstablishmentStore } from "../../../core/stores/establishment.store";
+import { LocationStore } from "../../../core/stores/location.store";
+import { UserStore } from "../../../core/stores/user.store";
 
 @Component({
-  selector: "app-establishment-form",
+  selector: "app-location-form",
   imports: [
     ReactiveFormsModule,
     FormsModule,
@@ -22,15 +23,15 @@ import { EstablishmentStore } from "../../../core/stores/establishment.store";
     MatInputModule,
     MatButtonModule,
   ],
-
-  templateUrl: "./establishment-form.component.html",
-  styleUrl: "./establishment-form.component.scss",
+  templateUrl: "./location-form.component.html",
+  styleUrl: "./location-form.component.scss",
 })
-export class EstablishmentFormComponent {
+export class LocationFormComponent {
   formGroup: FormGroup;
   @ViewChild(FormGroupDirective) formDirective!: FormGroupDirective;
 
-  readonly establishmentStore = inject(EstablishmentStore);
+  readonly userStore = inject(UserStore);
+  readonly locationStore = inject(LocationStore);
 
   constructor(private fb: FormBuilder) {
     this.formGroup = this.fb.group({
@@ -39,7 +40,12 @@ export class EstablishmentFormComponent {
   }
 
   handleSubmit() {
-    this.establishmentStore.postAll([this.formGroup.value]);
+    this.locationStore.postAll(this.userStore.activatedEstablishmentId(), [
+      {
+        ...this.formGroup.value,
+        establishmentId: this.userStore.activatedEstablishmentId(),
+      },
+    ]);
     this.formGroup.reset();
     this.formDirective.resetForm();
   }

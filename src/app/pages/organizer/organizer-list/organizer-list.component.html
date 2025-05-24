@@ -1,18 +1,18 @@
-<h2>Establishments</h2>
-@if (establishmentStore.hasError()) {
+<h2>Organizers</h2>
+@if (organizerStore.hasError()) {
 <p>Check the console for errors</p>
 }
 <!-- Blank Comment -->
-@if(!establishmentStore.hasError() && !establishmentStore.isLoading()) {
+@if(!organizerStore.hasError() && !organizerStore.isLoading()) {
 <table
   mat-table
-  [dataSource]="establishmentStore.establishments()"
+  [dataSource]="organizerStore.organizers()"
   class="mat-elevation-z8"
 >
   <!-- Id Column -->
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef>Establishment Id</th>
-    <td mat-cell *matCellDef="let element">{{ element.establishmentId }}</td>
+    <th mat-header-cell *matHeaderCellDef>Location Id</th>
+    <td mat-cell *matCellDef="let element">{{ element.organizerId }}</td>
   </ng-container>
   <!-- Name Column -->
   <ng-container matColumnDef="name">

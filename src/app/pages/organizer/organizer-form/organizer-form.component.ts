@@ -11,10 +11,11 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatButtonModule } from "@angular/material/button";
 
-import { EstablishmentStore } from "../../../core/stores/establishment.store";
+import { OrganizerStore } from "../../../core/stores/organizer.store";
+import { UserStore } from "../../../core/stores/user.store";
 
 @Component({
-  selector: "app-establishment-form",
+  selector: "app-organizer-form",
   imports: [
     ReactiveFormsModule,
     FormsModule,
@@ -22,15 +23,15 @@ import { EstablishmentStore } from "../../../core/stores/establishment.store";
     MatInputModule,
     MatButtonModule,
   ],
-
-  templateUrl: "./establishment-form.component.html",
-  styleUrl: "./establishment-form.component.scss",
+  templateUrl: "./organizer-form.component.html",
+  styleUrl: "./organizer-form.component.scss",
 })
-export class EstablishmentFormComponent {
+export class OrganizerFormComponent {
   formGroup: FormGroup;
   @ViewChild(FormGroupDirective) formDirective!: FormGroupDirective;
 
-  readonly establishmentStore = inject(EstablishmentStore);
+  readonly userStore = inject(UserStore);
+  readonly organizerStore = inject(OrganizerStore);
 
   constructor(private fb: FormBuilder) {
     this.formGroup = this.fb.group({
@@ -39,7 +40,12 @@ export class EstablishmentFormComponent {
   }
 
   handleSubmit() {
-    this.establishmentStore.postAll([this.formGroup.value]);
+    this.organizerStore.postAll(this.userStore.activatedEstablishmentId(), [
+      {
+        ...this.formGroup.value,
+        establishmentId: this.userStore.activatedEstablishmentId(),
+      },
+    ]);
     this.formGroup.reset();
     this.formDirective.resetForm();
   }

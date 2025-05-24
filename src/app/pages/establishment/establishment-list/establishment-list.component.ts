@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from "@angular/core";
 import { MatTableModule } from "@angular/material/table";
 
-import { Establishment } from "../establishment";
+import { Establishment } from "../../../core/models/establishment";
 import { EstablishmentStore } from "../../../core/stores/establishment.store";
 
 @Component({
@@ -12,7 +12,7 @@ import { EstablishmentStore } from "../../../core/stores/establishment.store";
 })
 export class EstablishmentListComponent implements OnInit {
   establishmentList: Establishment[] = [];
-  displayedColumns: string[] = ["establishment-id", "name"];
+  displayedColumns: string[] = ["id", "name"];
 
   readonly establishmentStore = inject(EstablishmentStore);
 
