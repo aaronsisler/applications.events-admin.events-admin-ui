@@ -1,41 +1,45 @@
 import { Routes } from "@angular/router";
-import { EstablishmentComponent } from "./pages/establishment/establishment.component";
-import { EventComponent } from "./pages/event/event.component";
 import { EventScheduleComponent } from "./pages/event-schedule/event-schedule.component";
-import { OrganizerComponent } from "./pages/organizer/organizer.component";
 import { ScheduledEventComponent } from "./pages/scheduled-event/scheduled-event.component";
 import { PublishedEventScheduleComponent } from "./pages/published-event-schedule/published-event-schedule.component";
 import { PublishedEventScheduleAssociateComponent } from "./pages/published-event-schedule/associate/published-event-schedule-associate.component";
 import { PublishedEventScheduleSubmitComponent } from "./pages/published-event-schedule/submit/published-event-schedule-submit.component";
 import { PublishedEventScheduleCreateComponent } from "./pages/published-event-schedule/create/published-event-schedule-create.component";
-import { EventScheduleCreateComponent } from "./pages/event-schedule/create/event-schedule-create.component";
-import { EventSchedulePopulateComponent } from "./pages/event-schedule/populate/event-schedule-populate.component";
-import { EventScheduleSubmitComponent } from "./pages/event-schedule/submit/event-schedule-submit.component";
+import { EventScheduleListComponent } from "./pages/event-schedule/event-schedule-list/event-schedule-list.component";
 
 export const routes: Routes = [
   {
     path: "establishment",
-    component: EstablishmentComponent,
+    loadComponent: () =>
+      import("./pages/establishment/establishment.component").then(
+        (c) => c.EstablishmentComponent
+      ),
   },
   {
     path: "event",
-    component: EventComponent,
+    loadComponent: () =>
+      import("./pages/event/event.component").then((c) => c.EventComponent),
   },
   {
     path: "event-schedule",
     component: EventScheduleComponent,
-  },
-  {
-    path: "event-schedule/create",
-    component: EventScheduleCreateComponent,
-  },
-  {
-    path: "event-schedule/populate",
-    component: EventSchedulePopulateComponent,
-  },
-  {
-    path: "event-schedule/submit",
-    component: EventScheduleSubmitComponent,
+    children: [
+      { path: "", redirectTo: "list", pathMatch: "full" },
+      {
+        path: "list",
+        loadComponent: () =>
+          import(
+            "./pages/event-schedule/event-schedule-list/event-schedule-list.component"
+          ).then((c) => c.EventScheduleListComponent),
+      },
+      {
+        path: "workflow",
+        loadChildren: () =>
+          import(
+            "./pages/event-schedule/workflow/event-schedule-workflow-routing.module"
+          ).then((m) => m.EventScheduleWorkflowRoutingModule),
+      },
+    ],
   },
   {
     path: "location",
@@ -46,7 +50,10 @@ export const routes: Routes = [
   },
   {
     path: "organizer",
-    component: OrganizerComponent,
+    loadComponent: () =>
+      import("./pages/organizer/organizer.component").then(
+        (c) => c.OrganizerComponent
+      ),
   },
   {
     path: "scheduled-event",
