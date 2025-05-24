@@ -1,1 +1,17 @@
-<p>event-form works!</p>
+<form [formGroup]="formGroup" (ngSubmit)="handleSubmit()">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <input matInput formControlName="category" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+  <button mat-raised-button type="submit" [disabled]="formGroup.invalid">
+    Create
+  </button>
+</form>

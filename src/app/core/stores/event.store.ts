@@ -32,7 +32,7 @@ export const EventStore = signalStore(
           },
         });
       },
-      postAll: (establishmentId: string, events: Event[]): void => {
+      createAll: (establishmentId: string, events: Event[]): void => {
         eventService.postList(establishmentId, events).subscribe({
           next: (newEvents) => {
             patchState(store, () => ({
