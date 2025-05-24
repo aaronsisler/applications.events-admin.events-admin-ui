@@ -1,0 +1,32 @@
+<h2>Events</h2>
+@if (eventStore.hasError()) {
+<p>Check the console for errors</p>
+}
+<!-- Blank Comment -->
+@if(!eventStore.hasError() && !eventStore.isLoading()) {
+<table mat-table [dataSource]="eventStore.events()" class="mat-elevation-z8">
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Event Id</th>
+    <td mat-cell *matCellDef="let element">{{ element.eventId }}</td>
+  </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+  <!-- Category Column -->
+  <ng-container matColumnDef="category">
+    <th mat-header-cell *matHeaderCellDef>Category</th>
+    <td mat-cell *matCellDef="let element">{{ element.category }}</td>
+  </ng-container>
+  <!-- Description Column -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>Description</th>
+    <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+}

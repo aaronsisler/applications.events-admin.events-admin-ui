@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, OnInit } from "@angular/core";
 import { MatTableModule } from "@angular/material/table";
 
 import { Location } from "../../../core/models/location";
@@ -11,7 +11,7 @@ import { UserStore } from "../../../core/stores/user.store";
   templateUrl: "./location-list.component.html",
   styleUrl: "./location-list.component.scss",
 })
-export class LocationListComponent {
+export class LocationListComponent implements OnInit {
   locationList: Location[] = [];
   displayedColumns: string[] = ["id", "name"];
 
