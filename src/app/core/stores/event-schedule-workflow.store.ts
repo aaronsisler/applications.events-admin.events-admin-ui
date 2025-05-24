@@ -13,7 +13,7 @@ interface EventScheduleWorkflowState {
 
 const initialState: EventScheduleWorkflowState = {
   eventSchedule: undefined,
-  currentStep: 0,
+  currentStep: 1,
   hasError: false,
   isLoading: true,
 };

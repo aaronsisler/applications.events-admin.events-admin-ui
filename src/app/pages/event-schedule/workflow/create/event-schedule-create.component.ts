@@ -13,6 +13,8 @@ import { MatButtonModule } from "@angular/material/button";
 
 import { EventScheduleWorkflowStore } from "../../../../core/stores/event-schedule-workflow.store";
 import { UserStore } from "../../../../core/stores/user.store";
+import { Router } from "@angular/router";
+import { timeout } from "rxjs";
 
 @Component({
   selector: "app-event-schedule-create",
@@ -33,7 +35,7 @@ export class EventScheduleCreateComponent {
   readonly userStore = inject(UserStore);
   readonly eventScheduleWorkflowStore = inject(EventScheduleWorkflowStore);
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.formGroup = this.fb.group({
       name: ["", Validators.required],
     });
@@ -51,5 +53,7 @@ export class EventScheduleCreateComponent {
     );
     this.formGroup.reset();
     this.formDirective.resetForm();
+    this.eventScheduleWorkflowStore.incrementStep();
+    this.router.navigate(["event-schedule/workflow/populate"]);
   }
 }

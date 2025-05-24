@@ -5,7 +5,6 @@ import { PublishedEventScheduleComponent } from "./pages/published-event-schedul
 import { PublishedEventScheduleAssociateComponent } from "./pages/published-event-schedule/associate/published-event-schedule-associate.component";
 import { PublishedEventScheduleSubmitComponent } from "./pages/published-event-schedule/submit/published-event-schedule-submit.component";
 import { PublishedEventScheduleCreateComponent } from "./pages/published-event-schedule/create/published-event-schedule-create.component";
-import { EventScheduleListComponent } from "./pages/event-schedule/event-schedule-list/event-schedule-list.component";
 
 export const routes: Routes = [
   {

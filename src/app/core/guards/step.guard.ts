@@ -9,6 +9,9 @@ export const eventScheduleStepGuard: CanActivateFn = () => {
 
   const currentStep = eventScheduleWorkflowStore.currentStep();
 
+  console.log("currentStep");
+  console.log(currentStep);
+
   if (currentStep > 1) {
     return true;
   }
