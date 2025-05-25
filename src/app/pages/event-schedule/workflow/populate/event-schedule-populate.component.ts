@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { EventSelectorComponent } from "../event-selector/event-selector.component";
+import { EventSelectorComponent } from "./event-selector/event-selector.component";
 import { EventStore } from "../../../../core/stores/event.store";
 import { ScheduledEventListComponent } from "./scheduled-event-list/scheduled-event-list.component";
 

@@ -11,10 +11,10 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 
-import { EventStore } from "../../../../core/stores/event.store";
-import { EventScheduleWorkflowStore } from "../../../../core/stores/event-schedule-workflow.store";
-import { UserStore } from "../../../../core/stores/user.store";
-import { Event } from "../../../../core/models/event";
+import { EventStore } from "../../../../../core/stores/event.store";
+import { EventScheduleWorkflowStore } from "../../../../../core/stores/event-schedule-workflow.store";
+import { UserStore } from "../../../../../core/stores/user.store";
+import { Event } from "../../../../../core/models/event";
 
 @Component({
   selector: "app-event-selector",
