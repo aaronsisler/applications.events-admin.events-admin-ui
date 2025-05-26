@@ -1,39 +1,52 @@
-import { Component } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from "@angular/forms";
+
+import { MatButtonModule } from "@angular/material/button";
+import {
+  MatNativeDateModule,
+  provideNativeDateAdapter,
+} from "@angular/material/core";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatIconModule } from "@angular/material/icon";
+import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
+import { MatTimepickerModule } from "@angular/material/timepicker";
+
 import { EventSelectorComponent } from "./event-selector/event-selector.component";
 import { EventStore } from "../../../../core/stores/event.store";
-import { ScheduledEventListComponent } from "./scheduled-event-list/scheduled-event-list.component";
-import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
-
-import { ReactiveFormsModule } from "@angular/forms";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { MatIconModule } from "@angular/material/icon";
-import { MatButtonModule } from "@angular/material/button";
-import { CommonModule } from "@angular/common";
 import { Event } from "../../../../core/models/event";
-import { ScheduledEvent } from "../../../../core/models/scheduled-event";
-import { MatSelectModule } from "@angular/material/select";
 import { ScheduledEventType } from "../../../../core/models/scheduled-event-type";
 import { enumToList } from "../../../../core/utils/enum-to-list";
 import { ScheduledEventInterval } from "../../../../core/models/scheduled-event-interval";
 import { ScheduledEventDay } from "../../../../core/models/scheduled-event-day";
+import { MatDatepickerModule } from "@angular/material/datepicker";
 
 @Component({
   selector: "app-event-schedule-populate",
   imports: [
     EventSelectorComponent,
-    ScheduledEventListComponent,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatTimepickerModule,
     MatIconModule,
     MatButtonModule,
     CommonModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
   ],
   templateUrl: "./event-schedule-populate.component.html",
   styleUrl: "./event-schedule-populate.component.scss",
-  providers: [EventStore],
+  providers: [EventStore, provideNativeDateAdapter()],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventSchedulePopulateComponent {
   form: FormGroup;
