@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, EventEmitter, inject, Output } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -35,12 +35,13 @@ export class EventSelectorComponent {
   readonly eventStore = inject(EventStore);
   formGroup: FormGroup;
 
+  @Output() eventSelectedEmitter = new EventEmitter<Event>();
+
   readonly eventScheduleWorkflowStore = inject(EventScheduleWorkflowStore);
-  selectedEvent!: Event;
 
   constructor(private fb: FormBuilder) {
     this.formGroup = this.fb.group({
-      eventId: ["", Validators.required],
+      event: [undefined, Validators.required],
     });
   }
 
@@ -48,19 +49,11 @@ export class EventSelectorComponent {
     this.eventStore.getAll(this.userStore.activatedEstablishmentId());
   }
 
+  sendData() {}
+
   handleButtonClick(): void {
-    this.eventScheduleWorkflowStore.addScheduledEvent({
-      establishmentId: this.userStore.activatedEstablishmentId(),
-      eventId: this.selectedEvent?.eventId,
-      name: this.selectedEvent?.name,
-      description: this.selectedEvent?.description,
-      category: this.selectedEvent?.category,
-    });
+    this.eventSelectedEmitter.emit(this.formGroup.value.event);
 
     this.formGroup.reset();
-  }
-
-  handleSelect(input: any): void {
-    this.selectedEvent = input;
   }
 }

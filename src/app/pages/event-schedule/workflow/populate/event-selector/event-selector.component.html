@@ -1,17 +1,19 @@
 <form [formGroup]="formGroup" class="event-selector">
   <mat-form-field>
     <mat-label>Select an event</mat-label>
-    <mat-select
-      (selectionChange)="handleSelect($event.value)"
-      formControlName="eventId"
-    >
+    <mat-select formControlName="event">
       <mat-option [value]="null">-- Select --</mat-option>
-      @for (event of eventStore.events(); track event.eventId) {
+      @for (event of eventStore.events(); track $index) {
       <mat-option [value]="event">{{ event.name }}</mat-option>
       }
     </mat-select>
   </mat-form-field>
-  <button mat-raised-button type="button" (click)="handleButtonClick()">
+  <button
+    mat-raised-button
+    type="button"
+    [disabled]="formGroup.invalid"
+    (click)="handleButtonClick()"
+  >
     Add event
   </button>
 </form>

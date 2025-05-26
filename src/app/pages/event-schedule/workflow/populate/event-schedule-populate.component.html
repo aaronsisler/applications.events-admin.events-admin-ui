@@ -1,9 +1,13 @@
-<app-event-selector></app-event-selector>
+<app-event-selector
+  (eventSelectedEmitter)="handleEmittedEvent($event)"
+></app-event-selector>
+
 <hr />
 <app-scheduled-event-list></app-scheduled-event-list>
 <hr />
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <button mat-raised-button color="primary" type="submit">Submit</button>
   <div formArrayName="items">
     <div
       *ngFor="let group of items.controls; let i = index"
@@ -14,6 +18,40 @@
         <input matInput formControlName="name" placeholder="Enter name" />
       </mat-form-field>
       &nbsp;
+      <mat-form-field>
+        <mat-label>Select an scheduled event type</mat-label>
+        <mat-select formControlName="scheduledEventType">
+          <mat-option [value]="null">-- Select --</mat-option>
+          @for (scheduledEventType of scheduledEventTypeOptions; track $index) {
+          <mat-option [value]="scheduledEventType">{{
+            scheduledEventType
+          }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field>
+        <mat-label>Select an scheduled event interval</mat-label>
+        <mat-select formControlName="scheduledEventInterval">
+          <mat-option [value]="null">-- Select --</mat-option>
+          @for (scheduledEventInterval of scheduledEventIntervalOptions; track
+          $index) {
+          <mat-option [value]="scheduledEventInterval">{{
+            scheduledEventInterval
+          }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Category {{ i + 1 }}</mat-label>
+        <input
+          matInput
+          formControlName="category"
+          placeholder="Enter category"
+        />
+      </mat-form-field>
+      &nbsp;
       <mat-form-field appearance="fill" class="w-100">
         <mat-label>Description {{ i + 1 }}</mat-label>
         <input
@@ -22,6 +60,7 @@
           placeholder="Enter description"
         />
       </mat-form-field>
+      &nbsp;
 
       <button
         mat-icon-button
@@ -33,7 +72,4 @@
       </button>
     </div>
   </div>
-
-  <button mat-button type="button" (click)="addItem()">Add Item</button>
-  <button mat-raised-button color="primary" type="submit">Submit</button>
 </form>

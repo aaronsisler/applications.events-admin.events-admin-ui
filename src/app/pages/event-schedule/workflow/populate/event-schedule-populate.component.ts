@@ -10,6 +10,13 @@ import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { CommonModule } from "@angular/common";
+import { Event } from "../../../../core/models/event";
+import { ScheduledEvent } from "../../../../core/models/scheduled-event";
+import { MatSelectModule } from "@angular/material/select";
+import { ScheduledEventType } from "../../../../core/models/scheduled-event-type";
+import { enumToList } from "../../../../core/utils/enum-to-list";
+import { ScheduledEventInterval } from "../../../../core/models/scheduled-event-interval";
+import { ScheduledEventDay } from "../../../../core/models/scheduled-event-day";
 
 @Component({
   selector: "app-event-schedule-populate",
@@ -19,6 +26,7 @@ import { CommonModule } from "@angular/common";
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
     MatIconModule,
     MatButtonModule,
     CommonModule,
@@ -30,24 +38,40 @@ import { CommonModule } from "@angular/common";
 export class EventSchedulePopulateComponent {
   form: FormGroup;
 
+  scheduledEventTypeOptions: string[] = enumToList(ScheduledEventType);
+  scheduledEventIntervalOptions: string[] = enumToList(ScheduledEventInterval);
+  scheduledEventDayOptions: string[] = enumToList(ScheduledEventDay);
+
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       items: this.fb.array([]),
     });
-
-    console.log(this.items);
   }
 
   get items(): FormArray {
     return this.form.get("items") as FormArray;
   }
 
-  addItem() {
+  handleEmittedEvent(event: Event) {
+    console.log(event);
+    this.addItem(event);
+  }
+
+  addItem(rawEvent: Event) {
     const group = this.fb.group({
-      name: ["", Validators.required],
-      description: [""],
+      establishmentId: [rawEvent.establishmentId, Validators.required],
+      eventId: [rawEvent.eventId, Validators.required],
+      name: [rawEvent.name, Validators.required],
+      category: [rawEvent.category],
+      description: [rawEvent.description],
+      scheduledEventType: ["", Validators.required],
+      scheduledEventInterval: [""],
+      scheduledEventDay: [""],
+      startTime: ["", Validators.required],
+      endTime: ["", Validators.required],
+      scheduledEventDate: [""],
     });
-    this.items.push(group); // now items is FormArray of FormGroup
+    this.items.push(group);
   }
 
   removeItem(index: number) {
