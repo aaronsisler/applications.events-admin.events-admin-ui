@@ -1,5 +1,10 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from "@angular/core";
 import {
   FormArray,
   FormBuilder,
@@ -7,12 +12,14 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
+import { Router } from "@angular/router";
 
 import { MatButtonModule } from "@angular/material/button";
 import {
   MatNativeDateModule,
   provideNativeDateAdapter,
 } from "@angular/material/core";
+import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
@@ -26,7 +33,7 @@ import { ScheduledEventType } from "../../../../core/models/scheduled-event-type
 import { enumToList } from "../../../../core/utils/enum-to-list";
 import { ScheduledEventInterval } from "../../../../core/models/scheduled-event-interval";
 import { ScheduledEventDay } from "../../../../core/models/scheduled-event-day";
-import { MatDatepickerModule } from "@angular/material/datepicker";
+import { EventScheduleWorkflowStore } from "../../../../core/stores/event-schedule-workflow.store";
 
 @Component({
   selector: "app-event-schedule-populate",
@@ -50,6 +57,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 })
 export class EventSchedulePopulateComponent {
   form: FormGroup;
+  router = inject(Router);
 
   scheduledEventTypeOptions: string[] = enumToList(ScheduledEventType);
   scheduledEventIntervalOptions: string[] = enumToList(ScheduledEventInterval);
@@ -66,7 +74,6 @@ export class EventSchedulePopulateComponent {
   }
 
   handleEmittedEvent(event: Event) {
-    console.log(event);
     this.addItem(event);
   }
 
@@ -93,5 +100,6 @@ export class EventSchedulePopulateComponent {
 
   onSubmit() {
     console.log("Form values:", this.form.value);
+    // this.router.navigate(["/event-schedule/workflow/submit"]);
   }
 }

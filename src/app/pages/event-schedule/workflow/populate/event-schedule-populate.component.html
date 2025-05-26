@@ -41,6 +41,19 @@
         </mat-select>
       </mat-form-field>
       &nbsp;
+      <mat-form-field>
+        <mat-label>Pick a start time</mat-label>
+        <input matInput [matTimepicker]="startTime" />
+        <mat-timepicker-toggle matIconSuffix [for]="startTime" />
+        <mat-timepicker #startTime />
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field>
+        <mat-label>Pick an end time</mat-label>
+        <input matInput [matTimepicker]="endTime" />
+        <mat-timepicker-toggle matIconSuffix [for]="endTime" />
+        <mat-timepicker #endTime /> </mat-form-field
+      >&nbsp;
       <mat-form-field appearance="fill">
         <mat-label>Event Date</mat-label>
         <input
@@ -55,19 +68,6 @@
         <mat-datepicker #scheduledEventDate></mat-datepicker>
       </mat-form-field>
       &nbsp;
-      <mat-form-field>
-        <mat-label>Pick a start time</mat-label>
-        <input matInput [matTimepicker]="startTime" />
-        <mat-timepicker-toggle matIconSuffix [for]="startTime" />
-        <mat-timepicker #startTime />
-      </mat-form-field>
-      &nbsp;
-      <mat-form-field>
-        <mat-label>Pick an end time</mat-label>
-        <input matInput [matTimepicker]="endTime" />
-        <mat-timepicker-toggle matIconSuffix [for]="endTime" />
-        <mat-timepicker #endTime /> </mat-form-field
-      >&nbsp;
       <mat-form-field appearance="fill" class="w-100">
         <mat-label>Category {{ i + 1 }}</mat-label>
         <input
