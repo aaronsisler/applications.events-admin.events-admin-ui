@@ -1,59 +1,52 @@
-# EventsAdminUi
+# application.event-admin.events-admin-ui
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12.
+// form-component.ts
+import { Component, computed, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormStore } from './form.store';
+import { CommonModule } from '@angular/common';
 
-## Development server
+@Component({
+selector: 'app-dynamic-form',
+standalone: true,
+imports: [ReactiveFormsModule, CommonModule],
+template: `  <form [formGroup]="form">
+      <div *ngFor="let control of controls(); let i = index">
+        <label>{{ control.name }}</label>
+        <input
+          type="text"
+          [formControlName]="control.id"
+          (input)="onInputChange(control.id, $any($event.target).value)"
+        />
+        <button (click)="removeControl(control.id)">Remove</button>
+      </div>
+      <button (click)="addControl()">Add Control</button>
+    </form>`,
+})
+export class DynamicFormComponent {
+private formBuilder = inject(FormBuilder);
+private formStore = inject(FormStore);
+form = new FormGroup({});
+controls = computed(() => this.formStore.controls());
 
-To start a local development server, run:
+constructor() {
+this.controls().forEach((control) => {
+this.form.addControl(control.id.toString(), this.formBuilder.control(control.value));
+});
+}
 
-```bash
-ng serve
-```
+addControl() {
+const id = Date.now();
+this.formStore.addControl({ id, name: `Control ${id}`, value: '' });
+this.form.addControl(id.toString(), this.formBuilder.control(''));
+}
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+removeControl(id: number) {
+this.formStore.removeControl(id);
+this.form.removeControl(id.toString());
+}
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+onInputChange(id: number, value: string) {
+this.formStore.updateControl(id, value);
+}
+}
