@@ -4,12 +4,12 @@
 
 <hr />
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form class="scheduled-event-list" [formGroup]="form" (ngSubmit)="onSubmit()">
   <button mat-raised-button color="primary" type="submit">Submit</button>
   <br />
   &nbsp;
-  <div class="form-items" formArrayName="items">
-    @for(group of items.controls; let i = $index; track i) {
+  <div formArrayName="scheduledEvents">
+    @for(group of scheduledEventsFormArray.controls; let i = $index; track i) {
     <div [formGroupName]="i">
       <mat-form-field appearance="fill" class="w-100">
         <mat-label>Name</mat-label>
@@ -85,13 +85,11 @@
           placeholder="Enter description"
         />
       </mat-form-field>
-      &nbsp;
-
       <button
         mat-icon-button
         color="warn"
         type="button"
-        (click)="removeItem(i)"
+        (click)="removeScheduledEvent(i)"
       >
         <mat-icon>delete</mat-icon>
       </button>

@@ -30,21 +30,29 @@ export const EventScheduleWorkflowStore = signalStore(
         patchState(store, () => ({
           ...initialState,
         })),
-      addScheduledEvent: (scheduledEvent: ScheduledEvent): void =>
+      addScheduledEvent(scheduledEvent: ScheduledEvent) {
         patchState(store, () => ({
           scheduledEvents: [...store.scheduledEvents(), scheduledEvent],
-        })),
-      updateScheduledEvent: (
-        index: number,
-        scheduledEvent: ScheduledEvent
-      ): void =>
-        patchState(store, () => ({
-          scheduledEvents: [
-            ...store.scheduledEvents().slice(0, index),
-            scheduledEvent,
-            ...store.scheduledEvents().slice(index + 1),
-          ],
-        })),
+        }));
+      },
+
+      updateScheduledEvent(index: number, updated: Partial<ScheduledEvent>) {
+        const current = store.scheduledEvents();
+        if (index < 0 || index >= current.length) {
+          return;
+        }
+
+        const updatedList = current.map((scheduledEvent, i) =>
+          i === index ? { ...scheduledEvent, ...updated } : scheduledEvent
+        );
+
+        patchState(store, () => ({ scheduledEvents: updatedList }));
+      },
+      removeScheduledEvent(index: number) {
+        patchState(store, (state) => ({
+          scheduledEvents: state.scheduledEvents.filter((_, i) => i !== index),
+        }));
+      },
       incrementStep: (): void =>
         patchState(store, () => ({
           currentStep: store.currentStep() + 1,
