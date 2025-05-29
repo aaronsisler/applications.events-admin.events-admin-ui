@@ -9,9 +9,8 @@
   <br />
   &nbsp;
   <div formArrayName="scheduledEvents">
-    @for(group of scheduledEventsFormArray.controls; let rowIndex = $index;
-    track group) {
-    <div [formGroupName]="rowIndex">
+    @for(group of scheduledEventsFormArray.controls; let i = $index; track i) {
+    <div [formGroupName]="i">
       <mat-form-field appearance="fill" class="w-100">
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" placeholder="Enter name" />
@@ -70,7 +69,7 @@
       </mat-form-field>
       &nbsp;
       <mat-form-field appearance="fill" class="w-100">
-        <mat-label>Category</mat-label>
+        <mat-label>Category {{ i + 1 }}</mat-label>
         <input
           matInput
           formControlName="category"
@@ -79,7 +78,7 @@
       </mat-form-field>
       &nbsp;
       <mat-form-field appearance="fill" class="w-100">
-        <mat-label>Description</mat-label>
+        <mat-label>Description {{ i + 1 }}</mat-label>
         <input
           matInput
           formControlName="description"
@@ -90,7 +89,7 @@
         mat-icon-button
         color="warn"
         type="button"
-        (click)="removeScheduledEvent(rowIndex)"
+        (click)="removeScheduledEvent(i)"
       >
         <mat-icon>delete</mat-icon>
       </button>

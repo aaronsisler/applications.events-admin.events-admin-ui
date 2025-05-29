@@ -5,11 +5,9 @@ import {
   DestroyRef,
   effect,
   inject,
-  OnInit,
 } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import {
-  AbstractControl,
   FormArray,
   FormBuilder,
   FormGroup,
@@ -62,15 +60,18 @@ import { ScheduledEvent } from "../../../../core/models/scheduled-event";
   providers: [EventStore, provideNativeDateAdapter()],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EventSchedulePopulateComponent implements OnInit {
+export class EventSchedulePopulateComponent {
   router = inject(Router);
-  fb = inject(FormBuilder);
-  destroyRef = inject(DestroyRef);
-  readonly eventScheduleWorkflowStore = inject(EventScheduleWorkflowStore);
-
   scheduledEventTypeOptions: string[] = enumToList(ScheduledEventType);
   scheduledEventIntervalOptions: string[] = enumToList(ScheduledEventInterval);
   scheduledEventDayOptions: string[] = enumToList(ScheduledEventDay);
+
+  private readonly eventScheduleWorkflowStore = inject(
+    EventScheduleWorkflowStore
+  );
+
+  private fb = inject(FormBuilder);
+  private destroyRef = inject(DestroyRef);
 
   form = this.fb.group({
     scheduledEvents: this.fb.array<FormGroup>([]),
@@ -80,67 +81,63 @@ export class EventSchedulePopulateComponent implements OnInit {
     return this.form.get("scheduledEvents") as FormArray;
   }
 
-  ngOnInit() {
-    const scheduledEvents: ScheduledEvent[] =
-      this.eventScheduleWorkflowStore.scheduledEvents();
+  constructor() {
+    effect(() => {
+      const scheduledEvents: ScheduledEvent[] =
+        this.eventScheduleWorkflowStore.scheduledEvents();
 
-    scheduledEvents.forEach((scheduledEvent, i) => {
-      this.addScheduleEventToFormArray(scheduledEvent);
-    });
-  }
+      // Sync form array length with store array length
+      const formArray = this.scheduledEventsFormArray;
 
-  removeScheduledEvent(index: number) {
-    this.eventScheduleWorkflowStore.removeScheduledEvent(index);
-    this.scheduledEventsFormArray.removeAt(index);
-  }
+      // Remove extra controls
+      while (formArray.length > scheduledEvents.length) {
+        formArray.removeAt(formArray.length - 1);
+      }
 
-  handleEmittedEvent(event: Event) {
-    this.addScheduledEvent(event);
-  }
+      // Add missing controls
+      while (formArray.length < scheduledEvents.length) {
+        const group = this.fb.group({
+          establishmentId: ["", Validators.required],
+          name: ["", Validators.required],
+          description: [""],
+          eventId: ["", Validators.required],
+          category: [""],
+          scheduledEventType: ["", Validators.required],
+          scheduledEventInterval: [""],
+          scheduledEventDay: [""],
+          startTime: ["", Validators.required],
+          endTime: ["", Validators.required],
+          scheduledEventDate: [""],
+        });
 
-  onSubmit() {
-    console.log(
-      "Form values:",
-      this.eventScheduleWorkflowStore.scheduledEvents()
-    );
-    this.router.navigate(["/event-schedule/workflow/submit"]);
-  }
+        // Setup valueChanges subscription to update store as before
+        group.valueChanges
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe((value) => {
+            const idx = formArray.controls.indexOf(group);
+            if (idx !== -1) {
+              this.eventScheduleWorkflowStore.updateScheduledEvent(
+                idx,
+                value as ScheduledEvent
+              );
+            }
+          });
 
-  addScheduleEventToFormArray(scheduledEvent: ScheduledEvent) {
-    const group = this.fb.group({
-      establishmentId: [scheduledEvent.establishmentId, Validators.required],
-      name: [scheduledEvent.name, Validators.required],
-      description: [scheduledEvent.description],
-      eventId: [scheduledEvent.eventId, Validators.required],
-      category: [scheduledEvent.category],
-      scheduledEventType: [
-        scheduledEvent.scheduledEventType,
-        Validators.required,
-      ],
-      scheduledEventInterval: [scheduledEvent.scheduledEventInterval],
-      scheduledEventDay: [scheduledEvent.scheduledEventDay],
-      startTime: [scheduledEvent.startTime, Validators.required],
-      endTime: [scheduledEvent.endTime, Validators.required],
-      scheduledEventDate: [scheduledEvent.scheduledEventDate],
-    });
+        formArray.push(group);
+      }
 
-    group.valueChanges
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((value) => {
-        const idx = this.scheduledEventsFormArray.controls.indexOf(group);
-        if (idx !== -1) {
-          this.eventScheduleWorkflowStore.updateScheduledEvent(
-            idx,
-            value as ScheduledEvent
-          );
+      // Now patch form group values without recreating controls
+      scheduledEvents.forEach((scheduledEvent, i) => {
+        const group = formArray.at(i) as FormGroup;
+        if (group) {
+          group.patchValue(scheduledEvent, { emitEvent: false });
         }
       });
-
-    this.scheduledEventsFormArray.push(group);
+    });
   }
 
   addScheduledEvent(event: Event) {
-    const scheduledEvent: ScheduledEvent = {
+    this.eventScheduleWorkflowStore.addScheduledEvent({
       eventScheduleId:
         this.eventScheduleWorkflowStore.eventSchedule()?.eventScheduleId || "",
       establishmentId: event.establishmentId,
@@ -153,9 +150,22 @@ export class EventSchedulePopulateComponent implements OnInit {
       scheduledEventDate: "",
       name: event.name,
       description: event.description,
-    };
+    });
+  }
 
-    this.eventScheduleWorkflowStore.addScheduledEvent(scheduledEvent);
-    this.addScheduleEventToFormArray(scheduledEvent);
+  removeScheduledEvent(index: number) {
+    this.eventScheduleWorkflowStore.removeScheduledEvent(index);
+  }
+
+  handleEmittedEvent(event: Event) {
+    this.addScheduledEvent(event);
+  }
+
+  onSubmit() {
+    console.log(
+      "Form values:",
+      this.eventScheduleWorkflowStore.scheduledEvents()
+    );
+    this.router.navigate(["/event-schedule/workflow/submit"]);
   }
 }
