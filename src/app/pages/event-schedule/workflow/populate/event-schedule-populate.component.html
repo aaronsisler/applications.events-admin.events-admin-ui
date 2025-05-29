@@ -5,7 +5,15 @@
 <hr />
 
 <form class="scheduled-event-list" [formGroup]="form" (ngSubmit)="onSubmit()">
-  <button mat-raised-button color="primary" type="submit">Submit</button>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="form.invalid"
+  >
+    Submit
+  </button>
+  <button mat-raised-button color="primary" type="submit">Submit CL</button>
   <br />
   &nbsp;
   <div formArrayName="scheduledEvents">
@@ -43,15 +51,40 @@
       </mat-form-field>
       &nbsp;
       <mat-form-field>
+        <mat-label>Select an scheduled event day</mat-label>
+        <mat-select formControlName="scheduledEventDay">
+          <mat-option [value]="null">-- Select --</mat-option>
+          @for (scheduledEventDay of scheduledEventDayOptions; track $index) {
+          <mat-option [value]="scheduledEventDay">{{
+            scheduledEventDay
+          }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      &nbsp;
+      <br />
+      <mat-form-field>
         <mat-label>Pick a start time</mat-label>
-        <input matInput [matTimepicker]="startTime" />
+        <input
+          matInput
+          [matTimepicker]="startTime"
+          formControlName="startTime"
+          matTimepickerMin="07:30"
+          matTimepickerMax="19:00"
+        />
         <mat-timepicker-toggle matIconSuffix [for]="startTime" />
         <mat-timepicker #startTime />
       </mat-form-field>
       &nbsp;
       <mat-form-field>
         <mat-label>Pick an end time</mat-label>
-        <input matInput [matTimepicker]="endTime" />
+        <input
+          matInput
+          [matTimepicker]="endTime"
+          formControlName="endTime"
+          matTimepickerMin="07:30"
+          matTimepickerMax="19:00"
+        />
         <mat-timepicker-toggle matIconSuffix [for]="endTime" />
         <mat-timepicker #endTime /> </mat-form-field
       >&nbsp;
@@ -77,15 +110,16 @@
           placeholder="Enter category"
         />
       </mat-form-field>
-      &nbsp;
-      <mat-form-field appearance="fill" class="w-100">
+      <br />
+      <mat-form-field appearance="fill" class="">
         <mat-label>Description</mat-label>
-        <input
+        <textarea
           matInput
           formControlName="description"
           placeholder="Enter description"
-        />
+        ></textarea>
       </mat-form-field>
+      &nbsp;
       <button
         mat-icon-button
         color="warn"
@@ -95,6 +129,9 @@
         <mat-icon>delete</mat-icon>
       </button>
     </div>
+    <br />
+    <hr />
+    <br />
     }
   </div>
 </form>

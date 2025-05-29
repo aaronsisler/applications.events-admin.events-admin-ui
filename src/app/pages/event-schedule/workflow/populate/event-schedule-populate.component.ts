@@ -3,13 +3,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
-  effect,
   inject,
   OnInit,
 } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import {
-  AbstractControl,
   FormArray,
   FormBuilder,
   FormGroup,
@@ -127,12 +125,36 @@ export class EventSchedulePopulateComponent implements OnInit {
     group.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((value) => {
+        let startTime;
+        let endTime;
+        let scheduledEventDate;
+        // Handles the TimePicker format and converts to HH:MM:SS
+        if (value.startTime) {
+          const date = new Date(value.startTime);
+          startTime = date.toLocaleTimeString("en-US", { hour12: false });
+        }
+        // Handles the TimePicker format and converts to HH:MM:SS
+        if (value.endTime) {
+          const date = new Date(value.endTime);
+          endTime = date.toLocaleTimeString("en-US", { hour12: false });
+        }
+        // Handles the DatePicker format and converts to YYYY-MM-DD
+        if (value.scheduledEventDate) {
+          const date = new Date(value.scheduledEventDate);
+          scheduledEventDate = date.toLocaleDateString("sv-SE", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          });
+        }
         const idx = this.scheduledEventsFormArray.controls.indexOf(group);
         if (idx !== -1) {
-          this.eventScheduleWorkflowStore.updateScheduledEvent(
-            idx,
-            value as ScheduledEvent
-          );
+          this.eventScheduleWorkflowStore.updateScheduledEvent(idx, {
+            ...value,
+            startTime,
+            endTime,
+            scheduledEventDate,
+          } as ScheduledEvent);
         }
       });
 

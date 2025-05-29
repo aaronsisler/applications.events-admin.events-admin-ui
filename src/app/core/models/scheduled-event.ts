@@ -21,8 +21,3 @@ export interface ScheduledEvent {
   createdOn?: Date;
   lastUpdatedOn?: Date;
 }
-
-// export interface ScheduledEvent {
-// name: string;
-// description?: string;
-// }
