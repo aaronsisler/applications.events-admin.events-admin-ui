@@ -1,4 +1,26 @@
-form {
-  .form-items {
+.scheduled-events-list__row {
+  display: grid;
+  width: 600px;
+
+  div {
+    display: grid;
+    grid-auto-flow: row;
+    align-items: baseline;
+    gap: 5px;
+  }
+  div:first-of-type {
+    grid-template-columns: 450px 305px 45px;
+  }
+  div:nth-of-type(2) {
+    grid-template-columns: 250px 250px 250px;
+  }
+  div:nth-of-type(3) {
+    grid-template-columns: 250px 250px 250px;
+  }
+  div:last-of-type {
+    padding-inline-end: 50px;
+    textarea {
+      height: 100px;
+    }
   }
 }

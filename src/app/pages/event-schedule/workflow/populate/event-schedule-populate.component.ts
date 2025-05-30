@@ -92,6 +92,13 @@ export class EventSchedulePopulateComponent implements OnInit {
     this.scheduledEventsFormArray.removeAt(index);
   }
 
+  checkScheduledEventTypeForGroupIsSingle(index: number): boolean {
+    return (
+      this.scheduledEventsFormArray.at(index).get("scheduledEventType")
+        ?.value == "SINGLE"
+    );
+  }
+
   handleEmittedEvent(event: Event) {
     this.addScheduledEvent(event);
   }
