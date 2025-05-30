@@ -11,5 +11,15 @@ import { EventScheduleWorkflowStore } from "../../../../../core/stores/event-sch
 })
 export class ScheduledEventListComponent {
   readonly eventScheduleWorkflowStore = inject(EventScheduleWorkflowStore);
-  displayedColumns: string[] = ["id", "name"];
+  displayedColumns: string[] = [
+    "name",
+    "scheduledEventType",
+    "scheduledEventInterval",
+    "scheduledEventDay",
+    "startTime",
+    "endTime",
+    "scheduledEventDate",
+    "category",
+    "description",
+  ];
 }

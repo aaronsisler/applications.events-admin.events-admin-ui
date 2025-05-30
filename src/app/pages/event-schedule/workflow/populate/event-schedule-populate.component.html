@@ -13,7 +13,14 @@
   >
     Submit
   </button>
-  <button mat-raised-button color="primary" type="submit">Submit CL</button>
+  <button
+    mat-raised-button
+    color="primary"
+    type="button"
+    (click)="onSubmitCl()"
+  >
+    Submit CL
+  </button>
   <br />
   &nbsp;
   <div formArrayName="scheduledEvents" class="scheduled-event-list">
@@ -55,7 +62,7 @@
             }
           </mat-select>
         </mat-form-field>
-        @if(!checkScheduledEventTypeForGroupIsSingle(rowIndex)) {
+        @if(checkScheduledEventTypeForDisplayOption(rowIndex) === "RECURRING") {
         <mat-form-field>
           <mat-label>Select an scheduled event interval</mat-label>
           <mat-select formControlName="scheduledEventInterval">
@@ -79,7 +86,7 @@
             }
           </mat-select>
         </mat-form-field>
-        } @if(checkScheduledEventTypeForGroupIsSingle(rowIndex)) {
+        } @if(checkScheduledEventTypeForDisplayOption(rowIndex) === "SINGLE") {
         <mat-form-field appearance="fill">
           <mat-label>Event Date</mat-label>
           <input

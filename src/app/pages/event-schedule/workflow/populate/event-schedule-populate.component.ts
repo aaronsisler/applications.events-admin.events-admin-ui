@@ -92,15 +92,21 @@ export class EventSchedulePopulateComponent implements OnInit {
     this.scheduledEventsFormArray.removeAt(index);
   }
 
-  checkScheduledEventTypeForGroupIsSingle(index: number): boolean {
-    return (
-      this.scheduledEventsFormArray.at(index).get("scheduledEventType")
-        ?.value == "SINGLE"
-    );
+  checkScheduledEventTypeForDisplayOption(index: number): string {
+    return this.scheduledEventsFormArray.at(index).get("scheduledEventType")
+      ?.value;
   }
 
   handleEmittedEvent(event: Event) {
     this.addScheduledEvent(event);
+  }
+
+  onSubmitCl() {
+    console.log(
+      "Form values:",
+      this.eventScheduleWorkflowStore.scheduledEvents()
+    );
+    this.router.navigate(["/event-schedule/workflow/submit"]);
   }
 
   onSubmit() {
@@ -136,17 +142,17 @@ export class EventSchedulePopulateComponent implements OnInit {
         let endTime;
         let scheduledEventDate;
         // Handles the TimePicker format and converts to HH:MM:SS
-        if (value.startTime) {
+        if (value.startTime && value.startTime.length != 8) {
           const date = new Date(value.startTime);
           startTime = date.toLocaleTimeString("en-US", { hour12: false });
         }
         // Handles the TimePicker format and converts to HH:MM:SS
-        if (value.endTime) {
+        if (value.endTime && value.endTime.length != 8) {
           const date = new Date(value.endTime);
           endTime = date.toLocaleTimeString("en-US", { hour12: false });
         }
         // Handles the DatePicker format and converts to YYYY-MM-DD
-        if (value.scheduledEventDate) {
+        if (value.scheduledEventDate && value.scheduledEventDate.length != 10) {
           const date = new Date(value.scheduledEventDate);
           scheduledEventDate = date.toLocaleDateString("sv-SE", {
             year: "numeric",
