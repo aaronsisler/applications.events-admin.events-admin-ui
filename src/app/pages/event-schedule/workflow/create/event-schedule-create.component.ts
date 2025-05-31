@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from "@angular/core";
+import { Component, inject, OnInit, ViewChild } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -27,7 +27,7 @@ import { UserStore } from "../../../../core/stores/user.store";
   templateUrl: "./event-schedule-create.component.html",
   styleUrl: "./event-schedule-create.component.scss",
 })
-export class EventScheduleCreateComponent {
+export class EventScheduleCreateComponent implements OnInit {
   formGroup: FormGroup;
   @ViewChild(FormGroupDirective) formDirective!: FormGroupDirective;
 
@@ -39,6 +39,10 @@ export class EventScheduleCreateComponent {
       name: ["", Validators.required],
       description: [""],
     });
+  }
+
+  ngOnInit() {
+    this.eventScheduleWorkflowStore.reset();
   }
 
   handleSubmit() {

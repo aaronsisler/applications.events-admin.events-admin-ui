@@ -1,2 +1,16 @@
-<p>event-schedule-submit works!</p>
+<form [formGroup]="formGroup">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" readonly />
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <input matInput formControlName="description" readonly />
+  </mat-form-field>
+  <br />
+  <button mat-raised-button color="primary" type="submit">
+    Submit Event Schedule
+  </button>
+</form>
 <app-scheduled-event-list />

@@ -17,16 +17,11 @@ import {
 import { Router } from "@angular/router";
 
 import { MatButtonModule } from "@angular/material/button";
-import {
-  MatNativeDateModule,
-  provideNativeDateAdapter,
-} from "@angular/material/core";
-import { MatDatepickerModule } from "@angular/material/datepicker";
+import { provideNativeDateAdapter } from "@angular/material/core";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
-import { MatTimepickerModule } from "@angular/material/timepicker";
 
 import { Event } from "../../../../core/models/event";
 import { ScheduledEventType } from "../../../../core/models/scheduled-event-type";
@@ -37,10 +32,9 @@ import { EventScheduleWorkflowStore } from "../../../../core/stores/event-schedu
 import { enumToList } from "../../../../core/utils/enum-to-list";
 import { EventSelectorComponent } from "./event-selector/event-selector.component";
 import { ScheduledEvent } from "../../../../core/models/scheduled-event";
+import { timeValidator } from "../../../../core/utils/time-validator";
 
 @Component({
-  standalone: true,
-
   selector: "app-event-schedule-populate",
   imports: [
     CommonModule,
@@ -49,11 +43,8 @@ import { ScheduledEvent } from "../../../../core/models/scheduled-event";
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatTimepickerModule,
     MatIconModule,
     MatButtonModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
   ],
   templateUrl: "./event-schedule-populate.component.html",
   styleUrl: "./event-schedule-populate.component.scss",
@@ -106,7 +97,6 @@ export class EventSchedulePopulateComponent implements OnInit {
       "Form values:",
       this.eventScheduleWorkflowStore.scheduledEvents()
     );
-    this.router.navigate(["/event-schedule/workflow/submit"]);
   }
 
   onSubmit() {
@@ -130,44 +120,26 @@ export class EventSchedulePopulateComponent implements OnInit {
       ],
       scheduledEventInterval: [scheduledEvent.scheduledEventInterval],
       scheduledEventDay: [scheduledEvent.scheduledEventDay],
-      startTime: [scheduledEvent.startTime, Validators.required],
-      endTime: [scheduledEvent.endTime, Validators.required],
-      scheduledEventDate: [scheduledEvent.scheduledEventDate],
+      startTime: [
+        scheduledEvent.startTime,
+        [Validators.required, timeValidator()],
+      ],
+      endTime: [scheduledEvent.endTime, [Validators.required, timeValidator()]],
+      scheduledEventDate: [
+        scheduledEvent.scheduledEventDate,
+        Validators.pattern(/^\d{4}-\d{2}-\d{2}$/),
+      ],
     });
 
     group.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((value) => {
-        let startTime;
-        let endTime;
-        let scheduledEventDate;
-        // Handles the TimePicker format and converts to HH:MM:SS
-        if (value.startTime && value.startTime.length != 8) {
-          const date = new Date(value.startTime);
-          startTime = date.toLocaleTimeString("en-US", { hour12: false });
-        }
-        // Handles the TimePicker format and converts to HH:MM:SS
-        if (value.endTime && value.endTime.length != 8) {
-          const date = new Date(value.endTime);
-          endTime = date.toLocaleTimeString("en-US", { hour12: false });
-        }
-        // Handles the DatePicker format and converts to YYYY-MM-DD
-        if (value.scheduledEventDate && value.scheduledEventDate.length != 10) {
-          const date = new Date(value.scheduledEventDate);
-          scheduledEventDate = date.toLocaleDateString("sv-SE", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-          });
-        }
         const idx = this.scheduledEventsFormArray.controls.indexOf(group);
         if (idx !== -1) {
-          this.eventScheduleWorkflowStore.updateScheduledEvent(idx, {
-            ...value,
-            startTime,
-            endTime,
-            scheduledEventDate,
-          } as ScheduledEvent);
+          this.eventScheduleWorkflowStore.updateScheduledEvent(
+            idx,
+            value as ScheduledEvent
+          );
         }
       });
 
@@ -180,11 +152,11 @@ export class EventSchedulePopulateComponent implements OnInit {
         this.eventScheduleWorkflowStore.eventSchedule()?.eventScheduleId || "",
       establishmentId: event.establishmentId,
       eventId: event.eventId,
-      scheduledEventType: "",
-      scheduledEventInterval: "",
-      scheduledEventDay: "",
-      startTime: "",
-      endTime: "",
+      scheduledEventType: "RECURRING",
+      scheduledEventInterval: "WEEKLY",
+      scheduledEventDay: "MONDAY",
+      startTime: "09:30:30",
+      endTime: "10:30:30",
       scheduledEventDate: "",
       name: event.name,
       description: event.description,
