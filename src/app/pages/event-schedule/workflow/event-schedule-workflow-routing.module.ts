@@ -20,12 +20,12 @@ const routes: Routes = [
       {
         path: "populate",
         component: EventSchedulePopulateComponent,
-        // canActivate: [eventScheduleStepGuard],
+        canActivate: [eventScheduleStepGuard],
       },
       {
         path: "submit",
         component: EventScheduleSubmitComponent,
-        // canActivate: [eventScheduleStepGuard],
+        canActivate: [eventScheduleStepGuard],
       },
     ],
   },
