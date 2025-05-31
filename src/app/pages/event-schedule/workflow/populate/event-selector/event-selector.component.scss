@@ -1,0 +1,10 @@
+.event-selector {
+  display: flex;
+
+  mat-form-field {
+    margin-inline-end: 2rem;
+  }
+  button {
+    margin-block-start: 0.5rem;
+  }
+}

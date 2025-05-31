@@ -1,1 +1,122 @@
-<p>event-schedule-populate works!</p>
+<app-event-selector
+  (eventSelectedEmitter)="handleEmittedEvent($event)"
+></app-event-selector>
+
+<hr />
+
+<form class="scheduled-event-list" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="form.invalid"
+  >
+    Submit
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    type="button"
+    (click)="onSubmitCl()"
+  >
+    Submit CL
+  </button>
+  <br />
+  &nbsp;
+  <div formArrayName="scheduledEvents" class="scheduled-event-list">
+    @for(group of scheduledEventsFormArray.controls; let rowIndex = $index;
+    track group) {
+    <div [formGroupName]="rowIndex" class="scheduled-events-list__row">
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" placeholder="Enter name" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Category</mat-label>
+          <input
+            matInput
+            formControlName="category"
+            placeholder="Enter category"
+          />
+        </mat-form-field>
+        <button
+          mat-icon-button
+          color="warn"
+          type="button"
+          (click)="removeScheduledEvent(rowIndex)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Select an scheduled event type</mat-label>
+          <mat-select formControlName="scheduledEventType">
+            <mat-option [value]="null">-- Select --</mat-option>
+            @for (scheduledEventType of scheduledEventTypeOptions; track $index)
+            {
+            <mat-option [value]="scheduledEventType">{{
+              scheduledEventType
+            }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        @if(checkScheduledEventTypeForDisplayOption(rowIndex) === "RECURRING") {
+        <mat-form-field>
+          <mat-label>Select an scheduled event interval</mat-label>
+          <mat-select formControlName="scheduledEventInterval">
+            <mat-option [value]="null">-- Select --</mat-option>
+            @for (scheduledEventInterval of scheduledEventIntervalOptions; track
+            $index) {
+            <mat-option [value]="scheduledEventInterval">{{
+              scheduledEventInterval
+            }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Select an scheduled event day</mat-label>
+          <mat-select formControlName="scheduledEventDay">
+            <mat-option [value]="null">-- Select --</mat-option>
+            @for (scheduledEventDay of scheduledEventDayOptions; track $index) {
+            <mat-option [value]="scheduledEventDay">{{
+              scheduledEventDay
+            }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        } @if(checkScheduledEventTypeForDisplayOption(rowIndex) === "SINGLE") {
+        <mat-form-field appearance="fill">
+          <mat-label>Enter event date e.g. 2025-05-20</mat-label>
+          <input matInput formControlName="scheduledEventDate" />
+        </mat-form-field>
+        }
+      </div>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Enter start time e.g. 09:30:00</mat-label>
+          <input matInput formControlName="startTime" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Enter end time e.g. 17:45:00</mat-label>
+          <input matInput formControlName="endTime" />
+        </mat-form-field>
+      </div>
+      <div class="">
+        <mat-form-field appearance="fill" class="">
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            formControlName="description"
+            placeholder="Enter description"
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <br />
+    <hr />
+    <br />
+    }
+  </div>
+</form>

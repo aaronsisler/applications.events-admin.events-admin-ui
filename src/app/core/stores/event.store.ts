@@ -41,7 +41,7 @@ export const EventStore = signalStore(
             }));
           },
           error: (error) => {
-            console.error("Failed to fetch events", error);
+            console.error("Failed to create events", error);
             patchState(store, () => ({ hasError: true, isLoading: false }));
           },
         });

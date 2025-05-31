@@ -1,0 +1,64 @@
+<h2>Scheduled Events</h2>
+@if (eventScheduleWorkflowStore.hasError()) {
+<p>Check the console for errors</p>
+}
+<!-- Blank Comment -->
+@if(!eventScheduleWorkflowStore.hasError() &&
+!eventScheduleWorkflowStore.isLoading()) {
+<table
+  mat-table
+  [dataSource]="eventScheduleWorkflowStore.scheduledEvents()"
+  class="mat-elevation-z8"
+>
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+  <!-- Scheduled Event Type Column -->
+  <ng-container matColumnDef="scheduledEventType">
+    <th mat-header-cell *matHeaderCellDef>Scheduled Event Type</th>
+    <td mat-cell *matCellDef="let element">{{ element.scheduledEventType }}</td>
+  </ng-container>
+  <!-- Scheduled Event Interval Column -->
+  <ng-container matColumnDef="scheduledEventInterval">
+    <th mat-header-cell *matHeaderCellDef>Scheduled Event Interval</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.scheduledEventInterval }}
+    </td>
+  </ng-container>
+  <!-- Scheduled Event Day Column -->
+  <ng-container matColumnDef="scheduledEventDay">
+    <th mat-header-cell *matHeaderCellDef>Scheduled Event Day</th>
+    <td mat-cell *matCellDef="let element">{{ element.scheduledEventDay }}</td>
+  </ng-container>
+  <!-- Start Time Column -->
+  <ng-container matColumnDef="startTime">
+    <th mat-header-cell *matHeaderCellDef>Start Time</th>
+    <td mat-cell *matCellDef="let element">{{ element.startTime }}</td>
+  </ng-container>
+  <!-- End Time Column -->
+  <ng-container matColumnDef="endTime">
+    <th mat-header-cell *matHeaderCellDef>End Time</th>
+    <td mat-cell *matCellDef="let element">{{ element.endTime }}</td>
+  </ng-container>
+  <!-- Scheduled Event Date Column -->
+  <ng-container matColumnDef="scheduledEventDate">
+    <th mat-header-cell *matHeaderCellDef>Scheduled Event Date</th>
+    <td mat-cell *matCellDef="let element">{{ element.scheduledEventDate }}</td>
+  </ng-container>
+  <!-- Category Column -->
+  <ng-container matColumnDef="category">
+    <th mat-header-cell *matHeaderCellDef>Category</th>
+    <td mat-cell *matCellDef="let element">{{ element.category }}</td>
+  </ng-container>
+  <!-- Description Column -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>Description</th>
+    <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+}
