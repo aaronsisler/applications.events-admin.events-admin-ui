@@ -4,6 +4,7 @@ import { signalStore, withState, withMethods, patchState } from "@ngrx/signals";
 import { EventSchedule } from "../models/event-schedule";
 import { EventScheduleService } from "../services/event-schedule-service";
 import { ScheduledEvent } from "../models/scheduled-event";
+import { ScheduledEventService } from "../services/scheduled-event-service";
 
 interface EventScheduleWorkflowState {
   eventSchedule: EventSchedule | undefined;
@@ -25,6 +26,7 @@ export const EventScheduleWorkflowStore = signalStore(
   withState<EventScheduleWorkflowState>(initialState),
   withMethods((store) => {
     const eventScheduleService = inject(EventScheduleService);
+    const scheduledEventService = inject(ScheduledEventService);
     return {
       reset: (): void =>
         patchState(store, () => ({
@@ -61,12 +63,12 @@ export const EventScheduleWorkflowStore = signalStore(
         patchState(store, () => ({
           currentStep: store.currentStep() - 1,
         })),
-      createAll: (
+      createEventSchedule: (
         establishmentId: string,
-        eventSchedules: EventSchedule[]
+        eventSchedule: EventSchedule
       ): void => {
         eventScheduleService
-          .postList(establishmentId, eventSchedules)
+          .postList(establishmentId, [eventSchedule])
           .subscribe({
             next: (newEventSchedules) => {
               patchState(store, () => ({
@@ -76,6 +78,25 @@ export const EventScheduleWorkflowStore = signalStore(
             },
             error: (error) => {
               console.error("Failed to fetch event schedules", error);
+              patchState(store, () => ({ hasError: true, isLoading: false }));
+            },
+          });
+      },
+      createScheduledEvents: (): void => {
+        const eventScheduleId = store.eventSchedule()?.eventScheduleId;
+
+        if (eventScheduleId == undefined) {
+          throw Error("eventScheduleId is undefined");
+        }
+
+        scheduledEventService
+          .postList(eventScheduleId, store.scheduledEvents())
+          .subscribe({
+            next: () => {
+              patchState(store, () => initialState);
+            },
+            error: (error) => {
+              console.error("Failed to create scheduled events", error);
               patchState(store, () => ({ hasError: true, isLoading: false }));
             },
           });

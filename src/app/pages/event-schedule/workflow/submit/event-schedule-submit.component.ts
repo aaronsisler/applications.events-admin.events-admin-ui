@@ -5,6 +5,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-event-schedule-submit",
@@ -20,23 +21,22 @@ import { MatButtonModule } from "@angular/material/button";
 })
 export class EventScheduleSubmitComponent implements OnInit {
   readonly eventScheduleWorkflowStore = inject(EventScheduleWorkflowStore);
-  formGroup: FormGroup;
+  router = inject(Router);
+  fb = inject(FormBuilder);
 
-  constructor(private fb: FormBuilder) {
-    this.formGroup = this.fb.group({
-      name: [""],
-      description: [""],
-    });
+  formGroup!: FormGroup;
+
+  handleSubmit(): void {
+    this.eventScheduleWorkflowStore.createScheduledEvents();
+    this.router.navigate(["published-event-schedule/create"]);
   }
 
   ngOnInit() {
-    this.formGroup
-      .get("name")
-      ?.patchValue(this.eventScheduleWorkflowStore.eventSchedule()?.name);
-    this.formGroup
-      .get("description")
-      ?.patchValue(
-        this.eventScheduleWorkflowStore.eventSchedule()?.description
-      );
+    this.formGroup = this.fb.group({
+      name: [this.eventScheduleWorkflowStore.eventSchedule()?.name],
+      description: [
+        this.eventScheduleWorkflowStore.eventSchedule()?.description,
+      ],
+    });
   }
 }

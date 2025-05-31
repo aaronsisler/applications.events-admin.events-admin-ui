@@ -27,7 +27,7 @@ export const EventScheduleStore = signalStore(
             patchState(store, () => ({ eventSchedules, isLoading: false }));
           },
           error: (error) => {
-            console.error("Failed to create event schedules", error);
+            console.error("Failed to fetch event schedules", error);
             patchState(store, () => ({ hasError: true, isLoading: false }));
           },
         });

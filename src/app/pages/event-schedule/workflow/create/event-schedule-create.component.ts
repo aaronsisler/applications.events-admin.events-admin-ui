@@ -46,14 +46,12 @@ export class EventScheduleCreateComponent implements OnInit {
   }
 
   handleSubmit() {
-    this.eventScheduleWorkflowStore.createAll(
+    this.eventScheduleWorkflowStore.createEventSchedule(
       this.userStore.activatedEstablishmentId(),
-      [
-        {
-          ...this.formGroup.value,
-          establishmentId: this.userStore.activatedEstablishmentId(),
-        },
-      ]
+      {
+        ...this.formGroup.value,
+        establishmentId: this.userStore.activatedEstablishmentId(),
+      }
     );
     this.formGroup.reset();
     this.formDirective.resetForm();
