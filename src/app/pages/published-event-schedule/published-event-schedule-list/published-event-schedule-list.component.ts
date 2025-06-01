@@ -3,6 +3,7 @@ import { MatTableModule } from "@angular/material/table";
 
 import { PublishedEventScheduleStore } from "../../../core/stores/published-event-schedule.store";
 import { UserStore } from "../../../core/stores/user.store";
+import { environment } from "../../../../environments/environment";
 
 @Component({
   selector: "app-published-event-schedule-list",
@@ -26,5 +27,16 @@ export class PublishedEventScheduleListComponent {
     this.publishedEventScheduleStore.getAll(
       this.userStore.activatedEstablishmentId()
     );
+  }
+
+  onNavigate(filename: string) {
+    const urlParts = [
+      environment.storageUrl,
+      environment.storageFolder,
+      this.userStore.activatedEstablishmentId(),
+      filename,
+    ];
+
+    window.open(urlParts.join("/"), "_blank");
   }
 }

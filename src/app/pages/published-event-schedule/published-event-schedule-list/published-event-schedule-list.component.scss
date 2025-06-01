@@ -1,0 +1,9 @@
+@use "sass:color";
+
+.published-event-schedule-list__link {
+  cursor: pointer;
+}
+
+.published-event-schedule-list__link:hover {
+  background-color: color.adjust($color: aliceblue, $lightness: -10%);
+}
