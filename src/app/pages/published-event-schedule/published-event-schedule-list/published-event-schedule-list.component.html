@@ -30,7 +30,12 @@
   <!-- Filename Column -->
   <ng-container matColumnDef="filename">
     <th mat-header-cell *matHeaderCellDef>Filename</th>
-    <td mat-cell *matCellDef="let element">
+    <td
+      mat-cell
+      *matCellDef="let element"
+      (click)="onNavigate(element.filename)"
+      class="published-event-schedule-list__link"
+    >
       {{ element.filename }}
     </td>
   </ng-container>
