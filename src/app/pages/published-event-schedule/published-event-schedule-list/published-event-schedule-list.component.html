@@ -33,7 +33,7 @@
     <td
       mat-cell
       *matCellDef="let element"
-      (click)="onNavigate(element.filename)"
+      (click)="handleFileFetch(element.filename)"
       class="published-event-schedule-list__link"
     >
       {{ element.filename }}
