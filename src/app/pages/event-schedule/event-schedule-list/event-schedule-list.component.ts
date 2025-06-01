@@ -11,7 +11,7 @@ import { UserStore } from "../../../core/stores/user.store";
   templateUrl: "./event-schedule-list.component.html",
   styleUrl: "./event-schedule-list.component.scss",
 })
-export class EventScheduleListComponent {
+export class EventScheduleListComponent implements OnInit {
   eventList: Event[] = [];
   displayedColumns: string[] = ["id", "name", "description"];
 

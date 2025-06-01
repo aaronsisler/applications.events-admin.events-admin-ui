@@ -5,6 +5,8 @@ import { EventSchedule } from "../models/event-schedule";
 import { EventScheduleService } from "../services/event-schedule-service";
 import { ScheduledEvent } from "../models/scheduled-event";
 import { ScheduledEventService } from "../services/scheduled-event-service";
+import { PublishedEventSchedule } from "../models/published-event-schedule";
+import { PublishedEventScheduleService } from "../services/published-event-schedule-service";
 
 interface EventScheduleWorkflowState {
   eventSchedule: EventSchedule | undefined;
@@ -27,6 +29,7 @@ export const EventScheduleWorkflowStore = signalStore(
   withMethods((store) => {
     const eventScheduleService = inject(EventScheduleService);
     const scheduledEventService = inject(ScheduledEventService);
+    const publishedEventScheduleService = inject(PublishedEventScheduleService);
     return {
       reset: (): void =>
         patchState(store, () => ({
@@ -63,6 +66,22 @@ export const EventScheduleWorkflowStore = signalStore(
         patchState(store, () => ({
           currentStep: store.currentStep() - 1,
         })),
+      publishEventSchedule: (
+        establishmentId: string,
+        publishedEventSchedule: PublishedEventSchedule
+      ): void => {
+        publishedEventScheduleService
+          .post(establishmentId, publishedEventSchedule)
+          .subscribe({
+            next: () => {
+              patchState(store, () => initialState);
+            },
+            error: (error) => {
+              console.error("Failed to publish event schedule", error);
+              patchState(store, () => ({ hasError: true, isLoading: false }));
+            },
+          });
+      },
       createEventSchedule: (
         establishmentId: string,
         eventSchedule: EventSchedule
@@ -77,7 +96,7 @@ export const EventScheduleWorkflowStore = signalStore(
               }));
             },
             error: (error) => {
-              console.error("Failed to fetch event schedules", error);
+              console.error("Failed to create event schedule", error);
               patchState(store, () => ({ hasError: true, isLoading: false }));
             },
           });
@@ -92,9 +111,7 @@ export const EventScheduleWorkflowStore = signalStore(
         scheduledEventService
           .postList(eventScheduleId, store.scheduledEvents())
           .subscribe({
-            next: () => {
-              patchState(store, () => initialState);
-            },
+            next: () => {},
             error: (error) => {
               console.error("Failed to create scheduled events", error);
               patchState(store, () => ({ hasError: true, isLoading: false }));

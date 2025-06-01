@@ -6,6 +6,7 @@ import { EventSchedulePopulateComponent } from "./populate/event-schedule-popula
 import { EventScheduleSubmitComponent } from "./submit/event-schedule-submit.component";
 import { eventScheduleStepGuard } from "../../../core/guards/step.guard";
 import { EventScheduleWorkflowStore } from "../../../core/stores/event-schedule-workflow.store";
+import { EventSchedulePublishComponent } from "./publish/event-schedule-publish.component";
 
 const routes: Routes = [
   {
@@ -25,6 +26,11 @@ const routes: Routes = [
       {
         path: "submit",
         component: EventScheduleSubmitComponent,
+        canActivate: [eventScheduleStepGuard],
+      },
+      {
+        path: "publish",
+        component: EventSchedulePublishComponent,
         canActivate: [eventScheduleStepGuard],
       },
     ],

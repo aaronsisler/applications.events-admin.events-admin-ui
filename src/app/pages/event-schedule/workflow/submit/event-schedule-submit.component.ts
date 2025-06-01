@@ -28,7 +28,7 @@ export class EventScheduleSubmitComponent implements OnInit {
 
   handleSubmit(): void {
     this.eventScheduleWorkflowStore.createScheduledEvents();
-    this.router.navigate(["published-event-schedule/create"]);
+    this.router.navigate(["event-schedule/workflow/publish"]);
   }
 
   ngOnInit() {
