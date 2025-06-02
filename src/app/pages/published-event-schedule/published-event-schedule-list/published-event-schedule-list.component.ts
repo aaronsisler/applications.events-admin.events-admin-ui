@@ -4,6 +4,7 @@ import { MatTableModule } from "@angular/material/table";
 import { PublishedEventScheduleStore } from "../../../core/stores/published-event-schedule.store";
 import { UserStore } from "../../../core/stores/user.store";
 import { environment } from "../../../../environments/environment";
+import { CsvFileService } from "../../../core/services/csv-file-service";
 
 @Component({
   selector: "app-published-event-schedule-list",
@@ -14,6 +15,7 @@ import { environment } from "../../../../environments/environment";
 })
 export class PublishedEventScheduleListComponent {
   readonly userStore = inject(UserStore);
+  readonly csvFileService = inject(CsvFileService);
 
   readonly publishedEventScheduleStore = inject(PublishedEventScheduleStore);
   displayedColumns: string[] = [
@@ -29,14 +31,16 @@ export class PublishedEventScheduleListComponent {
     );
   }
 
-  onNavigate(filename: string) {
-    const urlParts = [
-      environment.storageUrl,
-      environment.storageFolder,
-      this.userStore.activatedEstablishmentId(),
-      filename,
-    ];
-
-    window.open(urlParts.join("/"), "_blank");
+  handleFileFetch(filename: string) {
+    this.csvFileService
+      .get(this.userStore.activatedEstablishmentId(), filename)
+      .subscribe({
+        next: (url) => {
+          window.open(url, "_blank");
+        },
+        error: (error) => {
+          console.error("Failed to fetch URL", error);
+        },
+      });
   }
 }
