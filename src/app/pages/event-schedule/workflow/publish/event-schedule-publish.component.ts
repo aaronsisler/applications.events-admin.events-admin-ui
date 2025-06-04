@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, effect, inject } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -34,9 +34,24 @@ export class EventSchedulePublishComponent {
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.formGroup = this.fb.group({
-      name: ["", Validators.required],
-      targetYear: ["", [Validators.required, Validators.pattern("^\\d{4}$")]],
-      targetMonth: ["", [Validators.required, Validators.pattern("^\\d{2}$")]],
+      name: ["Test", Validators.required],
+      targetYear: [
+        "2025",
+        [Validators.required, Validators.pattern("^\\d{4}$")],
+      ],
+      targetMonth: [
+        "05",
+        [Validators.required, Validators.pattern("^\\d{2}$")],
+      ],
+    });
+
+    effect(() => {
+      const hasCompleted = this.eventScheduleWorkflowStore.hasCompleted();
+
+      if (hasCompleted) {
+        this.eventScheduleWorkflowStore.reset();
+        this.router.navigate(["published-event-schedule"]);
+      }
     });
   }
 
@@ -46,12 +61,11 @@ export class EventSchedulePublishComponent {
       {
         ...this.formGroup.value,
         establishmentId: this.userStore.activatedEstablishmentId(),
-        eventScheduleId: this.userStore.activatedEstablishmentId(),
+        eventScheduleId:
+          this.eventScheduleWorkflowStore.eventSchedule()?.eventScheduleId,
         targetYear: this.formGroup.get("targetYear")?.value,
         targetMonth: this.formGroup.get("targetMonth")?.value,
       }
     );
-    this.eventScheduleWorkflowStore.reset();
-    this.router.navigate(["published-event-schedule"]);
   }
 }
