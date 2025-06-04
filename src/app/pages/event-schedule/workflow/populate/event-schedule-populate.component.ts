@@ -100,10 +100,6 @@ export class EventSchedulePopulateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(
-      "Form values:",
-      this.eventScheduleWorkflowStore.scheduledEvents()
-    );
     this.router.navigate(["/event-schedule/workflow/submit"]);
   }
 

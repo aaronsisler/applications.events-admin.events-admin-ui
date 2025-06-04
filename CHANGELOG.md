@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities.
 
+## [0.3.0] Working through the cleanup of publishing an event schedule
+
+### Added
+
+- Handling the "wait" before navigating to the published event schedules list
+
 ## [0.2.0] Creating an Event Schedule with Scheduled Events
 
 ### Added

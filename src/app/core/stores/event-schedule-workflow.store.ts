@@ -14,6 +14,7 @@ interface EventScheduleWorkflowState {
   currentStep: number;
   hasError: boolean;
   isLoading: boolean;
+  hasCompleted: boolean;
 }
 
 const initialState: EventScheduleWorkflowState = {
@@ -22,6 +23,7 @@ const initialState: EventScheduleWorkflowState = {
   currentStep: 1,
   hasError: false,
   isLoading: true,
+  hasCompleted: false,
 };
 
 export const EventScheduleWorkflowStore = signalStore(
@@ -74,7 +76,7 @@ export const EventScheduleWorkflowStore = signalStore(
           .post(establishmentId, publishedEventSchedule)
           .subscribe({
             next: () => {
-              patchState(store, () => initialState);
+              patchState(store, () => ({ hasCompleted: true }));
             },
             error: (error) => {
               console.error("Failed to publish event schedule", error);
