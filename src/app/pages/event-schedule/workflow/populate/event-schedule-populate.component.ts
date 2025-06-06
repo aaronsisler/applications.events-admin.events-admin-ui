@@ -150,12 +150,13 @@ export class EventSchedulePopulateComponent implements OnInit {
       eventId: event.eventId,
       scheduledEventType: "RECURRING",
       scheduledEventInterval: "WEEKLY",
-      scheduledEventDay: "MONDAY",
-      startTime: "09:30:00",
-      endTime: "10:30:00",
+      scheduledEventDay: "",
+      startTime: "",
+      endTime: "",
       scheduledEventDate: "",
       name: event.name,
       description: event.description,
+      category: event.category,
     };
 
     this.eventScheduleWorkflowStore.addScheduledEvent(scheduledEvent);

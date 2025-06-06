@@ -39,10 +39,7 @@ export class EventSchedulePublishComponent {
         "2025",
         [Validators.required, Validators.pattern("^\\d{4}$")],
       ],
-      targetMonth: [
-        "05",
-        [Validators.required, Validators.pattern("^\\d{2}$")],
-      ],
+      targetMonth: ["", [Validators.required, Validators.pattern("^\\d{2}$")]],
     });
 
     effect(() => {
